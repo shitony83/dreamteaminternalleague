@@ -168,16 +168,58 @@
   .team-card .t-tag { font-size: .78rem; color: var(--muted); }
 
   /* ===== PLAYERS / SQUAD ===== */
-  .players { display: flex; flex-wrap: wrap; gap: 8px; }
-  .p {
-    background: #f1f5f9;
+  .squad-card {
+    background: #fff;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: .82rem;
-    font-weight: 600;
-    color: var(--primary);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 14px rgba(15,23,42,.05);
   }
+  .squad-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .player-list { display: flex; flex-direction: column; gap: 6px; }
+  .player-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+  }
+  .player-row:hover { background: #f1f5f9; }
+  .p-photo {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50% 50%;
+    border: 2px dashed #cbd5e1;
+    flex-shrink: 0;
+  }
+  .p-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .p-name { font-weight: 700; color: var(--text); }
 
   /* ===== STANDINGS TABLE ===== */
   .table-wrap {
@@ -332,34 +374,80 @@
 </section>
 
 <!-- ================= SQUADS ================= -->
+<!-- ============================================================
+     📸 CARA ISI FOTO PEMAIN:
+     Setiap pemain berbentuk satu baris <div class="player-row">.
+     Di dalamnya ada slot foto:
+       <div class="p-photo"></div>
+     Untuk mengisi foto, ganti jadi:
+       <div class="p-photo" style="background-image:url('https://link-foto-kamu.jpg'); background-size:cover;"></div>
+     (atau taruh file foto di folder yang sama, lalu tulis nama filenya,
+      contoh: style="background-image:url('dragon1.jpg'); background-size:cover;")
+     ============================================================ -->
 <section id="squads">
   <h2 class="section-title">Daftar Pemain</h2>
 
-  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
-    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#1565c0; display:inline-flex;">B</span> BLUE DRAGON</h3>
-    <div class="players">
-      <span class="p">DRAGON1</span><span class="p">DRAGON2</span><span class="p">DRAGON3</span><span class="p">DRAGON4</span><span class="p">DRAGON5</span><span class="p">DRAGON6</span><span class="p">DRAGON7</span><span class="p">DRAGON8</span><span class="p">DRAGON9</span><span class="p">DRAGON10</span>
+  <div class="squad-card">
+    <h3 class="squad-title"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</h3>
+    <div class="player-list">
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">DRAGON1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">DRAGON2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">DRAGON3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">DRAGON4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">DRAGON5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">DRAGON6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">DRAGON7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">DRAGON8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">DRAGON9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">DRAGON10</span></div>
     </div>
   </div>
 
-  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
-    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#c62828; display:inline-flex;">R</span> RED PHOENIX</h3>
-    <div class="players">
-      <span class="p">PHOENIX1</span><span class="p">PHOENIX2</span><span class="p">PHOENIX3</span><span class="p">PHOENIX4</span><span class="p">PHOENIX5</span><span class="p">PHOENIX6</span><span class="p">PHOENIX7</span><span class="p">PHOENIX8</span><span class="p">PHOENIX9</span><span class="p">PHOENIX10</span>
+  <div class="squad-card">
+    <h3 class="squad-title"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</h3>
+    <div class="player-list">
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">PHOENIX1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">PHOENIX2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">PHOENIX3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">PHOENIX4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">PHOENIX5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">PHOENIX6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">PHOENIX7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">PHOENIX8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">PHOENIX9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">PHOENIX10</span></div>
     </div>
   </div>
 
-  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
-    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#eceff1; display:inline-flex;">W</span> WHITE TIGER</h3>
-    <div class="players">
-      <span class="p">TIGER1</span><span class="p">TIGER2</span><span class="p">TIGER3</span><span class="p">TIGER4</span><span class="p">TIGER5</span><span class="p">TIGER6</span><span class="p">TIGER7</span><span class="p">TIGER8</span><span class="p">TIGER9</span><span class="p">TIGER10</span>
+  <div class="squad-card">
+    <h3 class="squad-title"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</h3>
+    <div class="player-list">
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">TIGER1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">TIGER2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">TIGER3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">TIGER4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">TIGER5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">TIGER6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">TIGER7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">TIGER8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">TIGER9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">TIGER10</span></div>
     </div>
   </div>
 
-  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
-    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#b8860b; display:inline-flex;">G</span> GOLDEN KIRIN</h3>
-    <div class="players">
-      <span class="p">KIRIN1</span><span class="p">KIRIN2</span><span class="p">KIRIN3</span><span class="p">KIRIN4</span><span class="p">KIRIN5</span><span class="p">KIRIN6</span><span class="p">KIRIN7</span><span class="p">KIRIN8</span><span class="p">KIRIN9</span><span class="p">KIRIN10</span>
+  <div class="squad-card">
+    <h3 class="squad-title"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</h3>
+    <div class="player-list">
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">KIRIN1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">KIRIN2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">KIRIN3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">KIRIN4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">KIRIN5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">KIRIN6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">KIRIN7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">KIRIN8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">KIRIN9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">KIRIN10</span></div>
     </div>
   </div>
 </section>
