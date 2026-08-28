@@ -257,6 +257,19 @@
   .p-name { font-weight: 700; color: var(--text); }
 
   /* ===== STANDINGS TABLE ===== */
+  .standings-note {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 14px;
+    font-size: .88rem;
+    color: var(--muted);
+  }
+  .standings-note p { margin-bottom: 6px; color: var(--primary); }
+  .standings-note ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .standings-note li { line-height: 1.6; }
   .table-wrap {
     background: #fff;
     border: 1px solid var(--border);
@@ -533,6 +546,8 @@
 
      Aturan POIN (standar basket): menang = 2 poin, kalah = 1 poin.
      (2 menang + 1 kalah = 2*2 + 1*1 = 5 poin)
+     TIEBREAK: jika poin sama, lihat hasil head to head
+     (tim yang menang head-to-head mendapat peringkat lebih tinggi).
      💡 Ganti juga posisi urutan baris (rank) kalau ada yang naik/turun.
      ============================================================ -->
 <section id="standings" class="tab-content">
@@ -550,32 +565,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="rank-1">
+        <tr>
           <td>1</td>
           <td><div class="team-cell"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>2</td>
-          <td><div class="team-cell"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>3</td>
-          <td><div class="team-cell"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>4</td>
-          <td><div class="team-cell"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p style="color:var(--muted); font-size:.8rem; margin-top:10px;">
-    * Klasemen diperbarui setelah pertandingan berjalan.
-  </p>
+  <div class="standings-note">
+    <p><strong>📊 Sistem Klasemen</strong></p>
+    <ul>
+      <li>Klasemen disusun berdasarkan <strong>hasil pertandingan</strong> — setiap tim yang <strong>menang mendapat 2 poin</strong>, sementara tim yang <strong>kalah mendapat 1 poin</strong>.</li>
+      <li>Jika terdapat tim dengan <strong>poin yang sama</strong>, prioritas diberikan pada <strong>hasil head to head</strong> antara kedua tim tersebut — tim yang menang berhak menempati peringkat lebih tinggi.</li>
+      <li>Karena hasil pertandingan belum tersedia, klasemen saat ini diurutkan berdasarkan <strong>urutan abjad</strong>.</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ================= FIXTURES ================= -->
