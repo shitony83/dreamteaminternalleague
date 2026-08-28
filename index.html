@@ -167,6 +167,18 @@
   .team-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
   .team-card .t-tag { font-size: .78rem; color: var(--muted); }
 
+  /* ===== PLAYERS / SQUAD ===== */
+  .players { display: flex; flex-wrap: wrap; gap: 8px; }
+  .p {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
   /* ===== STANDINGS TABLE ===== */
   .table-wrap {
     background: #fff;
@@ -274,6 +286,7 @@
   <div class="inner">
     <a href="#about">About</a>
     <a href="#teams">Teams</a>
+    <a href="#squads">Daftar Pemain</a>
     <a href="#standings">Klasemen</a>
     <a href="#fixtures">Jadwal &amp; Hasil</a>
   </div>
@@ -314,6 +327,39 @@
       <div class="dot" style="background:#b8860b;">G</div>
       <h3>GOLDEN KIRIN</h3>
       <div class="t-tag">Tim 4</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SQUADS ================= -->
+<section id="squads">
+  <h2 class="section-title">Daftar Pemain</h2>
+
+  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
+    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#1565c0; display:inline-flex;">B</span> BLUE DRAGON</h3>
+    <div class="players">
+      <span class="p">DRAGON1</span><span class="p">DRAGON2</span><span class="p">DRAGON3</span><span class="p">DRAGON4</span><span class="p">DRAGON5</span><span class="p">DRAGON6</span><span class="p">DRAGON7</span><span class="p">DRAGON8</span><span class="p">DRAGON9</span><span class="p">DRAGON10</span>
+    </div>
+  </div>
+
+  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
+    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#c62828; display:inline-flex;">R</span> RED PHOENIX</h3>
+    <div class="players">
+      <span class="p">PHOENIX1</span><span class="p">PHOENIX2</span><span class="p">PHOENIX3</span><span class="p">PHOENIX4</span><span class="p">PHOENIX5</span><span class="p">PHOENIX6</span><span class="p">PHOENIX7</span><span class="p">PHOENIX8</span><span class="p">PHOENIX9</span><span class="p">PHOENIX10</span>
+    </div>
+  </div>
+
+  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
+    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#eceff1; display:inline-flex;">W</span> WHITE TIGER</h3>
+    <div class="players">
+      <span class="p">TIGER1</span><span class="p">TIGER2</span><span class="p">TIGER3</span><span class="p">TIGER4</span><span class="p">TIGER5</span><span class="p">TIGER6</span><span class="p">TIGER7</span><span class="p">TIGER8</span><span class="p">TIGER9</span><span class="p">TIGER10</span>
+    </div>
+  </div>
+
+  <div class="team-card" style="max-width:100%; text-align:left; margin-bottom:16px;">
+    <h3 style="margin-bottom:10px;"><span class="dot" style="background:#b8860b; display:inline-flex;">G</span> GOLDEN KIRIN</h3>
+    <div class="players">
+      <span class="p">KIRIN1</span><span class="p">KIRIN2</span><span class="p">KIRIN3</span><span class="p">KIRIN4</span><span class="p">KIRIN5</span><span class="p">KIRIN6</span><span class="p">KIRIN7</span><span class="p">KIRIN8</span><span class="p">KIRIN9</span><span class="p">KIRIN10</span>
     </div>
   </div>
 </section>
@@ -382,9 +428,8 @@
      📅 CARA UPDATE JADWAL & HASIL (buka file ini di NOTEPAD):
      Setiap pertandingan berbentuk blok <div class="fixture">.
      Cari dua baris:
-       - <div class="meta">  -> ubah teks "Jadwal belum diumumkan"
-                                jadi tanggal & jam, contoh:
-                                Sabtu, 30 Agu 2026 • 19:00 WIB
+       - <div class="meta">  -> ubah tanggal & jam, contoh:
+                                Jumat, 09 Okt 2026 • 19.00 – 20.15 WIB
        - <div class="score"> -> ubah "— : —" jadi skor, contoh: 78 : 65
      Setelah itu jangan lupa UPDATE KLASEMEN di bagian atas
      (GAME/WIN/LOSE/POIN tiap tim).
@@ -401,8 +446,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 1</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 1 • GAME 1</div>
+      <div>Jumat, 09 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
@@ -414,8 +459,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 1</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 1 • GAME 2</div>
+      <div>Jumat, 09 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
 
@@ -428,8 +473,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 2</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 2 • GAME 3</div>
+      <div>Jumat, 16 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
@@ -441,8 +486,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 2</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 2 • GAME 4</div>
+      <div>Jumat, 16 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
 
@@ -455,8 +500,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 3</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 3 • GAME 5</div>
+      <div>Jumat, 23 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
@@ -468,8 +513,8 @@
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 3</div>
-      <div>Jadwal belum diumumkan</div>
+      <div class="week">WEEK 3 • GAME 6</div>
+      <div>Jumat, 23 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
 
