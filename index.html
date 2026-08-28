@@ -140,6 +140,41 @@
   .about p { color: var(--muted); margin-bottom: 12px; }
   .about p:last-child { margin-bottom: 0; }
   .about .hl { color: var(--primary); font-weight: 700; }
+  .about .about-lead { font-size: 1.05rem; line-height: 1.7; margin-bottom: 22px; }
+  .about-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .about-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .about-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(15,23,42,.1); }
+  .about-card .ac-icon { font-size: 1.7rem; margin-bottom: 8px; }
+  .about-card .ac-label {
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .about-card .ac-value { font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+  .about-card .ac-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .about .about-closing {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding-top: 6px;
+    border-top: 1px solid var(--border);
+    margin-bottom: 0;
+  }
 
   /* ===== TEAMS GRID ===== */
   .teams {
@@ -338,11 +373,37 @@
 <section id="about">
   <h2 class="section-title">Tentang Liga</h2>
   <div class="about">
-    <p><span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah liga basket internal yang mempertemukan
-    4 tim dalam satu musim kompetisi (Season 1).</p>
-    <p>Setiap tim bertanding satu sama lain dalam sistem klasemen standar bola basket —
-    dihitung berdasarkan <span class="hl">Game, Win, Lose, dan Poin</span>.</p>
-    <p>Selamat bertanding, junjung sportivitas, dan semoga tim terbaik yang menang! 🏆</p>
+    <p class="about-lead">🏀 <span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah ajang kompetisi basket internal yang
+    mempertemukan <span class="hl">4 tim terbaik</span> dalam satu musim penuh gengsi — <span class="hl">Season 1</span>.</p>
+
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="ac-icon">🏆</div>
+        <div class="ac-label">SISTEM KOMPETISI</div>
+        <div class="ac-value">Round Robin</div>
+        <div class="ac-desc">Setiap tim saling bertemu satu sama lain untuk memperebutkan gelar juara.</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">👥</div>
+        <div class="ac-label">TIM PESERTA</div>
+        <div class="ac-value">4 Tim</div>
+        <div class="ac-desc">BLUE DRAGON • RED PHOENIX • WHITE TIGER • GOLDEN KIRIN</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">📊</div>
+        <div class="ac-label">KLASEMEN</div>
+        <div class="ac-value">Game • Win • Lose • Poin</div>
+        <div class="ac-desc">Sistem klasemen standar bola basket untuk menentukan peringkat.</div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon">🎯</div>
+        <div class="ac-label">SEMANGAT</div>
+        <div class="ac-value">Fair Play</div>
+        <div class="ac-desc">Junjung sportivitas, hormati lawan, dan berikan yang terbaik di setiap pertandingan.</div>
+      </div>
+    </div>
+
+    <p class="about-closing">Selamat bertanding, junjung sportivitas, dan semoga tim terbaik yang menang! 🏆</p>
   </div>
 </section>
 
