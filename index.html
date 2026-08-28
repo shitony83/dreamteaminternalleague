@@ -342,6 +342,14 @@
   }
   footer strong { color: #fff; }
 
+  /* ===== TAB CONTENT ===== */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  nav .nav-link.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
   @media (max-width: 640px) {
     .fixture .meta { text-align: left; width: 100%; }
     nav a { padding: 14px 12px; font-size: .82rem; }
@@ -361,16 +369,15 @@
 <!-- ================= NAV ================= -->
 <nav>
   <div class="inner">
-    <a href="#about">About</a>
-    <a href="#teams">Teams</a>
-    <a href="#squads">Daftar Pemain</a>
-    <a href="#standings">Klasemen</a>
-    <a href="#fixtures">Jadwal &amp; Hasil</a>
+    <a href="#about" class="nav-link active" data-tab="about">About</a>
+    <a href="#teams" class="nav-link" data-tab="teams">Team</a>
+    <a href="#standings" class="nav-link" data-tab="standings">Klasemen</a>
+    <a href="#fixtures" class="nav-link" data-tab="fixtures">Jadwal &amp; Hasil</a>
   </div>
 </nav>
 
 <!-- ================= ABOUT ================= -->
-<section id="about">
+<section id="about" class="tab-content active">
   <h2 class="section-title">Tentang Liga</h2>
   <div class="about">
     <p class="about-lead">🏀 <span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah ajang kompetisi basket internal yang
@@ -408,8 +415,8 @@
 </section>
 
 <!-- ================= TEAMS ================= -->
-<section id="teams">
-  <h2 class="section-title">Tim Peserta</h2>
+<section id="teams" class="tab-content">
+  <h2 class="section-title">Tim &amp; Pemain</h2>
   <div class="teams">
     <div class="team-card">
       <div class="dot" style="background:#1565c0;">B</div>
@@ -432,9 +439,8 @@
       <div class="t-tag">Tim 4</div>
     </div>
   </div>
-</section>
 
-<!-- ================= SQUADS ================= -->
+  <!-- ================= SQUADS (digabung dalam menu Team) ================= -->
 <!-- ============================================================
      📸 CARA ISI FOTO PEMAIN:
      Setiap pemain berbentuk satu baris <div class="player-row">.
@@ -445,7 +451,7 @@
      (atau taruh file foto di folder yang sama, lalu tulis nama filenya,
       contoh: style="background-image:url('dragon1.jpg'); background-size:cover;")
      ============================================================ -->
-<section id="squads">
+<div id="squads">
   <h2 class="section-title">Daftar Pemain</h2>
 
   <div class="squad-card">
@@ -511,7 +517,7 @@
       <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">KIRIN10</span></div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ================= STANDINGS ================= -->
 <!-- ============================================================
@@ -529,7 +535,7 @@
      (2 menang + 1 kalah = 2*2 + 1*1 = 5 poin)
      💡 Ganti juga posisi urutan baris (rank) kalau ada yang naik/turun.
      ============================================================ -->
-<section id="standings">
+<section id="standings" class="tab-content">
   <h2 class="section-title">Klasemen</h2>
   <div class="table-wrap">
     <table>
@@ -583,7 +589,7 @@
      Setelah itu jangan lupa UPDATE KLASEMEN di bagian atas
      (GAME/WIN/LOSE/POIN tiap tim).
      ============================================================ -->
-<section id="fixtures">
+<section id="fixtures" class="tab-content">
   <h2 class="section-title">Jadwal &amp; Hasil Pertandingan</h2>
 
   <!-- Week 1 -->
@@ -677,6 +683,41 @@
   <strong>DREAM TEAM INTERNAL LEAGUE</strong> — Season 1 &bull; © 2026<br>
   Dibuat untuk tontonan publik. Semoga sukses dan tetap sportif! 🏀
 </footer>
+
+<!-- ================= TAB NAVIGATION ================= -->
+<script>
+  // Tab switching: klik menu -> tampilkan section terkait saja
+  (function () {
+    var links = document.querySelectorAll('.nav-link');
+    var sections = document.querySelectorAll('.tab-content');
+
+    function showTab(name) {
+      // toggle sections
+      sections.forEach(function (sec) {
+        sec.classList.toggle('active', sec.id === name);
+      });
+      // toggle nav active state
+      links.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('data-tab') === name);
+      });
+      // scroll to top of content area
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        showTab(link.getAttribute('data-tab'));
+      });
+    });
+
+    // Buka tab sesuai hash di URL (misal #standings) saat load
+    var initial = window.location.hash.replace('#', '');
+    if (initial && document.getElementById(initial)) {
+      showTab(initial);
+    }
+  })();
+</script>
 
 </body>
 </html>
