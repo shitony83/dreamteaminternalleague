@@ -229,6 +229,35 @@
     color: var(--primary);
     margin-bottom: 14px;
   }
+  .squad-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .squad-head h3 { font-size: 1.4rem; color: var(--primary); }
+  .squad-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #0b0e14;
+  }
+  .btn-back {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--primary);
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background .15s;
+  }
+  .btn-back:hover { background: #f1f5f9; }
+  .team-card { cursor: pointer; }
   .player-list { display: flex; flex-direction: column; gap: 6px; }
   .player-row {
     display: flex;
@@ -438,46 +467,50 @@
 
 <!-- ================= TEAMS ================= -->
 <section id="teams" class="tab-content">
-  <h2 class="section-title">Tim &amp; Pemain</h2>
-  <div class="teams">
-    <div class="team-card">
-      <img src="logos/blue_dragon.webp" alt="BLUE DRAGON logo" class="team-logo">
-      <h3>BLUE DRAGON</h3>
-      <div class="t-tag">Tim 1</div>
+  <h2 class="section-title">Team &amp; Player</h2>
+
+  <!-- Daftar Tim (grid) -->
+  <div id="team-grid">
+    <div class="teams">
+      <div class="team-card" data-team="blue" onclick="showTeam('blue')">
+        <img src="logos/blue_dragon.webp" alt="BLUE DRAGON logo" class="team-logo">
+        <h3>BLUE DRAGON</h3>
+        <div class="t-tag">Tim 1</div>
+      </div>
+      <div class="team-card" data-team="red" onclick="showTeam('red')">
+        <img src="logos/red_phoenix.webp" alt="RED PHOENIX logo" class="team-logo">
+        <h3>RED PHOENIX</h3>
+        <div class="t-tag">Tim 2</div>
+      </div>
+      <div class="team-card" data-team="white" onclick="showTeam('white')">
+        <img src="logos/white_tiger.webp" alt="WHITE TIGER logo" class="team-logo">
+        <h3>WHITE TIGER</h3>
+        <div class="t-tag">Tim 3</div>
+      </div>
+      <div class="team-card" data-team="golden" onclick="showTeam('golden')">
+        <img src="logos/golden_kirin.webp" alt="GOLDEN KIRIN logo" class="team-logo">
+        <h3>GOLDEN KIRIN</h3>
+        <div class="t-tag">Tim 4</div>
+      </div>
     </div>
-    <div class="team-card">
-      <img src="logos/red_phoenix.webp" alt="RED PHOENIX logo" class="team-logo">
-      <h3>RED PHOENIX</h3>
-      <div class="t-tag">Tim 2</div>
-    </div>
-    <div class="team-card">
-      <img src="logos/white_tiger.webp" alt="WHITE TIGER logo" class="team-logo">
-      <h3>WHITE TIGER</h3>
-      <div class="t-tag">Tim 3</div>
-    </div>
-    <div class="team-card">
-      <img src="logos/golden_kirin.webp" alt="GOLDEN KIRIN logo" class="team-logo">
-      <h3>GOLDEN KIRIN</h3>
-      <div class="t-tag">Tim 4</div>
-    </div>
+    <p style="color:var(--muted); font-size:.8rem; text-align:center; margin-top:14px;">👆 Klik salah satu tim untuk melihat daftar pemainnya.</p>
   </div>
 
-  <!-- ================= SQUADS (digabung dalam menu Team) ================= -->
-<!-- ============================================================
-     📸 CARA ISI FOTO PEMAIN:
-     Setiap pemain berbentuk satu baris <div class="player-row">.
-     Di dalamnya ada slot foto:
-       <div class="p-photo"></div>
-     Untuk mengisi foto, ganti jadi:
-       <div class="p-photo" style="background-image:url('https://link-foto-kamu.jpg'); background-size:cover;"></div>
-     (atau taruh file foto di folder yang sama, lalu tulis nama filenya,
-      contoh: style="background-image:url('dragon1.jpg'); background-size:cover;")
-     ============================================================ -->
-<div id="squads">
-  <h2 class="section-title">Daftar Pemain</h2>
+  <!-- Detail Squad (tampil saat klik tim) -->
+  <div id="team-detail" style="display:none;">
+    <button class="btn-back" onclick="showTeamGrid()">&larr; Kembali ke Daftar Tim</button>
+    <div id="team-detail-content"></div>
+  </div>
+</section>
 
-  <div class="squad-card">
-    <h3 class="squad-title"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</h3>
+<!-- ================= SQUADS (data per tim, untuk ditampilkan saat klik) ================= -->
+<div id="squads" style="display:none;">
+
+  <div class="squad-card" data-team-detail="blue">
+    <div class="squad-head">
+      <img src="logos/blue_dragon.webp" alt="BLUE DRAGON" class="squad-logo">
+      <h3>BLUE DRAGON</h3>
+    </div>
     <div class="player-list">
       <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">DRAGON1</span></div>
       <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">DRAGON2</span></div>
@@ -492,8 +525,11 @@
     </div>
   </div>
 
-  <div class="squad-card">
-    <h3 class="squad-title"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</h3>
+  <div class="squad-card" data-team-detail="red">
+    <div class="squad-head">
+      <img src="logos/red_phoenix.webp" alt="RED PHOENIX" class="squad-logo">
+      <h3>RED PHOENIX</h3>
+    </div>
     <div class="player-list">
       <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">PHOENIX1</span></div>
       <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">PHOENIX2</span></div>
@@ -508,8 +544,11 @@
     </div>
   </div>
 
-  <div class="squad-card">
-    <h3 class="squad-title"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</h3>
+  <div class="squad-card" data-team-detail="white">
+    <div class="squad-head">
+      <img src="logos/white_tiger.webp" alt="WHITE TIGER" class="squad-logo">
+      <h3>WHITE TIGER</h3>
+    </div>
     <div class="player-list">
       <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">TIGER1</span></div>
       <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">TIGER2</span></div>
@@ -524,8 +563,11 @@
     </div>
   </div>
 
-  <div class="squad-card">
-    <h3 class="squad-title"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</h3>
+  <div class="squad-card" data-team-detail="golden">
+    <div class="squad-head">
+      <img src="logos/golden_kirin.webp" alt="GOLDEN KIRIN" class="squad-logo">
+      <h3>GOLDEN KIRIN</h3>
+    </div>
     <div class="player-list">
       <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">KIRIN1</span></div>
       <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">KIRIN2</span></div>
@@ -746,6 +788,28 @@
       showTab(initial);
     }
   })();
+
+  // Team detail: klik kartu tim -> tampilkan squad-nya saja
+  function showTeam(teamKey) {
+    var grid = document.getElementById('team-grid');
+    var detail = document.getElementById('team-detail');
+    var content = document.getElementById('team-detail-content');
+    var squad = document.querySelector('[data-team-detail="' + teamKey + '"]');
+    if (!squad) return;
+    content.innerHTML = '';
+    content.appendChild(squad.cloneNode(true));
+    grid.style.display = 'none';
+    detail.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showTeamGrid() {
+    var grid = document.getElementById('team-grid');
+    var detail = document.getElementById('team-detail');
+    grid.style.display = 'block';
+    detail.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 </script>
 
 </body>
