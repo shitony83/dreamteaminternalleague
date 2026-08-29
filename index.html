@@ -341,11 +341,13 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 18px;
-    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
   table {
     width: 100%;
+    min-width: 560px;
     border-collapse: collapse;
     font-size: .92rem;
   }
