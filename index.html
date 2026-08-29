@@ -6,103 +6,111 @@
 <title>DREAM TEAM INTERNAL LEAGUE — Season 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --void: #000000;
-    --surface: #090909;
-    --surface-2: #111111;
-    --white: #ffffff;
-    --silver: #a6a6a6;
-    --ghost: rgba(255, 255, 255, 0.6);
-    --frosted: rgba(255, 255, 255, 0.1);
-    --frosted-2: rgba(255, 255, 255, 0.5);
-    --blue: #0099ff;
-    --blue-glow: rgba(0, 153, 255, 0.15);
-    --border: rgba(255, 255, 255, 0.1);
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface-2: #1a2234;
+    --ink: #ffffff;
+    --muted: #94a3b8;
+    --orange: #ff6a00;
+    --yellow: #ffb800;
+    --border: rgba(255,255,255,0.12);
+    --blue: #2f7bff;
+    --red: #ff3b3b;
+    --gold: #f5c542;
+    --white-t: #e8e8e8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    background: var(--void);
-    color: var(--white);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   /* ===== HERO ===== */
   .hero {
     position: relative;
-    background: var(--void);
+    background:
+      linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.03) 48%, transparent 52%, transparent 100%),
+      linear-gradient(135deg, #0a0e1a 0%, #141c33 60%, #1b1a2e 100%);
     color: #fff;
     text-align: center;
-    padding: 110px 20px 90px;
+    padding: 100px 20px 84px;
     overflow: hidden;
   }
   .hero::before {
     content: "";
     position: absolute;
-    top: -40%; left: 50%;
+    bottom: -120px; left: 50%;
     transform: translateX(-50%);
-    width: 900px; height: 500px;
-    background: radial-gradient(ellipse at center, rgba(0,153,255,0.12), transparent 65%);
+    width: 900px; height: 320px;
+    background: radial-gradient(ellipse at center, rgba(255,106,0,0.16), transparent 65%);
     pointer-events: none;
   }
   .hero .badge {
     display: inline-block;
-    background: var(--frosted);
-    border: 1px solid var(--border);
-    padding: 8px 22px;
-    border-radius: 100px;
-    font-size: .75rem;
-    letter-spacing: 3px;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    font-size: .8rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--silver);
-    margin-bottom: 24px;
+    padding: 8px 24px;
+    transform: skewX(-8deg);
+    margin-bottom: 26px;
     position: relative;
+    box-shadow: 0 8px 24px rgba(255,106,0,0.35);
   }
+  .hero .badge span { display: inline-block; transform: skewX(8deg); }
   .hero h1 {
-    font-size: clamp(2.6rem, 8vw, 5.5rem);
-    font-weight: 600;
-    letter-spacing: -0.04em;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.6rem, 9vw, 6rem);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
     line-height: 0.95;
-    margin-bottom: 10px;
     position: relative;
+    transform: skewX(-4deg);
   }
-  .hero h1 .hl-blue { color: var(--blue); }
+  .hero h1 .hl { color: var(--orange); }
+  .hero h1 .hl2 { color: var(--yellow); }
   .hero .sub {
     font-size: 1.1rem;
-    color: var(--silver);
+    color: var(--muted);
     max-width: 560px;
-    margin: 18px auto 30px;
+    margin: 22px auto 34px;
     position: relative;
-    font-weight: 300;
+    font-weight: 500;
   }
   .hero .season-tag {
     display: inline-block;
-    background: var(--white);
-    color: #000;
-    font-weight: 700;
-    padding: 12px 32px;
-    border-radius: 100px;
-    font-size: .9rem;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    padding: 14px 38px;
+    transform: skewX(-8deg);
+    font-size: 1.05rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     position: relative;
     transition: transform .2s, box-shadow .2s;
-    box-shadow: 0 0 30px rgba(0,153,255,0.2);
+    box-shadow: 0 10px 30px rgba(255,184,0,0.25);
   }
-  .hero .season-tag:hover { transform: scale(1.04); }
+  .hero .season-tag span { display: inline-block; transform: skewX(8deg); }
+  .hero .season-tag:hover { transform: skewX(-8deg) scale(1.05); }
 
   /* ===== NAV ===== */
   nav {
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     position: sticky;
@@ -113,63 +121,71 @@
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    gap: 4px;
-    padding: 0 20px;
+    gap: 2px;
+    padding: 0 16px;
     overflow-x: auto;
   }
   nav a {
     display: inline-block;
     padding: 18px 20px;
-    color: var(--silver);
+    color: var(--muted);
     text-decoration: none;
-    font-weight: 500;
-    font-size: .9rem;
-    border-radius: 0 0 8px 8px;
+    font-weight: 800;
+    font-size: .86rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     white-space: nowrap;
-    transition: color .15s, background .15s;
+    border-bottom: 4px solid transparent;
+    transition: color .15s, border-color .15s, background .15s;
   }
-  nav a:hover { color: var(--white); background: var(--frosted); }
+  nav a:hover { color: var(--ink); background: rgba(255,255,255,0.05); }
   nav .nav-link.active {
-    color: var(--blue);
-    background: var(--blue-glow);
+    color: var(--orange);
+    border-bottom-color: var(--orange);
   }
 
   /* ===== SECTIONS ===== */
-  section { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
+  section { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
   .section-title {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    color: var(--white);
-    margin-bottom: 28px;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
+    transform: skewX(-3deg);
   }
-  .section-title .accent-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--blue);
-    box-shadow: 0 0 12px var(--blue);
-    flex-shrink: 0;
+  .section-title .num {
+    font-family: 'Anton', sans-serif;
+    color: var(--orange);
+    font-size: .9em;
+  }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--orange) 0 14px, transparent 14px 22px);
   }
 
   /* ===== ABOUT ===== */
   .about {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
+    border-left: 6px solid var(--orange);
+    padding: 36px 32px;
+    position: relative;
   }
   .about .about-lead {
     font-size: 1.15rem;
     line-height: 1.7;
-    color: var(--silver);
+    color: var(--muted);
     margin-bottom: 28px;
-    font-weight: 300;
+    font-weight: 500;
   }
-  .about .about-lead .hl { color: var(--white); font-weight: 600; }
+  .about .about-lead .hl { color: var(--ink); font-weight: 800; }
   .about-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -179,78 +195,96 @@
   .about-card {
     background: var(--surface-2);
     border: 1px solid var(--border);
-    border-radius: 14px;
     padding: 24px 18px;
     text-align: center;
-    transition: transform .15s, box-shadow .15s, border-color .15s;
+    position: relative;
+    transition: transform .15s, border-color .15s, background .15s;
   }
-  .about-card:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: var(--blue-glow) 0px 0px 0px 1px; }
-  .about-card .ac-icon { font-size: 1.6rem; margin-bottom: 12px; color: var(--blue); }
+  .about-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s;
+  }
+  .about-card:hover { transform: translateY(-4px); border-color: var(--orange); background: #1e2a40; }
+  .about-card:hover::before { transform: scaleX(1); }
+  .about-card .ac-icon { font-size: 1.7rem; margin-bottom: 12px; color: var(--yellow); font-weight: 800; }
   .about-card .ac-label {
-    font-size: .68rem;
-    font-weight: 600;
+    font-size: .7rem;
+    font-weight: 800;
     letter-spacing: 2px;
-    color: var(--ghost);
+    color: var(--muted);
     margin-bottom: 6px;
     text-transform: uppercase;
   }
-  .about-card .ac-value { font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: -0.01em; }
-  .about-card .ac-desc { font-size: .82rem; color: var(--silver); line-height: 1.55; }
+  .about-card .ac-value { font-family: 'Anton', sans-serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.02em; }
+  .about-card .ac-desc { font-size: .82rem; color: var(--muted); line-height: 1.55; }
   .about .about-closing {
     text-align: center;
     font-size: 1rem;
-    font-weight: 600;
-    color: var(--white);
+    font-weight: 700;
+    color: var(--yellow);
     padding-top: 20px;
     border-top: 1px solid var(--border);
     margin-bottom: 0;
-    letter-spacing: -0.01em;
   }
 
   /* ===== TEAMS GRID ===== */
   .teams {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 18px;
     margin-top: 8px;
   }
   .team-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 28px 20px;
+    padding: 30px 20px 24px;
     text-align: center;
     cursor: pointer;
-    transition: transform .18s, box-shadow .18s, border-color .18s;
+    position: relative;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
   }
-  .team-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: var(--blue-glow) 0px 0px 0px 1px, rgba(0,0,0,0.25) 0px 10px 30px; }
+  .team-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+  }
+  .team-card[data-team="blue"]::before { background: var(--blue); }
+  .team-card[data-team="red"]::before { background: var(--red); }
+  .team-card[data-team="white"]::before { background: var(--white-t); }
+  .team-card[data-team="golden"]::before { background: var(--gold); }
+  .team-card:hover { transform: translateY(-6px) rotate(-1deg); border-color: var(--orange); box-shadow: 0 14px 40px rgba(0,0,0,0.5); }
   .team-logo {
     width: 140px;
     height: 140px;
     object-fit: contain;
     margin: 0 auto 18px;
     display: block;
-    border-radius: 16px;
     border: 1px solid var(--border);
   }
-  .team-card h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-  .team-card .t-tag { font-size: .75rem; color: var(--silver); letter-spacing: 1px; text-transform: uppercase; }
+  .team-card h3 { font-family: 'Anton', sans-serif; font-size: 1.25rem; letter-spacing: 0.03em; margin-bottom: 4px; }
+  .team-card .t-tag { font-size: .72rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
   .grid-hint {
-    color: var(--silver);
-    font-size: .85rem;
+    color: var(--muted);
+    font-size: .88rem;
     text-align: center;
-    margin-top: 18px;
-    font-weight: 300;
+    margin-top: 22px;
+    font-weight: 600;
   }
-  .grid-hint .arrow { color: var(--blue); }
+  .grid-hint .arrow { color: var(--orange); font-weight: 800; }
 
   /* ===== SQUAD / PLAYERS ===== */
   .squad-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 18px;
+    border-top: 6px solid var(--orange);
     padding: 28px;
-    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
   .squad-head {
     display: flex;
@@ -258,92 +292,90 @@
     gap: 16px;
     margin-bottom: 20px;
     padding-bottom: 18px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
   }
-  .squad-head h3 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; }
+  .squad-head h3 { font-family: 'Anton', sans-serif; font-size: 1.7rem; letter-spacing: 0.03em; text-transform: uppercase; }
   .squad-logo {
     width: 64px;
     height: 64px;
     object-fit: contain;
-    border-radius: 12px;
     border: 1px solid var(--border);
   }
   .btn-back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--frosted);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 12px 24px;
-    font-size: .9rem;
-    font-weight: 600;
-    color: var(--white);
+    background: var(--orange);
+    border: none;
+    padding: 12px 26px;
+    font-family: 'Anton', sans-serif;
+    font-size: .85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
     cursor: pointer;
     margin-bottom: 20px;
+    transform: skewX(-6deg);
     transition: background .15s, transform .15s;
   }
-  .btn-back:hover { background: var(--frosted-2); transform: translateX(-2px); }
+  .btn-back span { display: inline-block; transform: skewX(6deg); }
+  .btn-back:hover { background: var(--yellow); color: var(--bg); }
   .player-list { display: flex; flex-direction: column; gap: 8px; }
   .player-row {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 8px 12px;
-    border-radius: 12px;
+    padding: 8px 14px;
     background: var(--surface-2);
-    border: 1px solid var(--border);
-    transition: border-color .15s;
+    border-left: 4px solid var(--orange);
+    transition: transform .12s, background .12s;
   }
-  .player-row:hover { border-color: var(--blue); }
+  .player-row:hover { transform: translateX(6px); background: #1e2a40; }
   .p-photo {
     width: 42px; height: 42px;
     border-radius: 50%;
-    background: #1a1a1a;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>');
+    background: #1a2234;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50% 50%;
-    border: 2px dashed rgba(255,255,255,0.2);
+    border: 2px dashed rgba(255,255,255,0.25);
     flex-shrink: 0;
   }
   .p-num {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--blue-glow);
-    border: 1px solid var(--blue);
-    color: var(--blue);
+    width: 30px; height: 30px;
+    background: var(--orange);
+    color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: .78rem;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: .85rem;
+    transform: skewX(-6deg);
     flex-shrink: 0;
-    font-family: 'Azeret Mono', monospace;
   }
-  .p-name { font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
+  .p-num span { transform: skewX(6deg); }
+  .p-name { font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
 
   /* ===== STANDINGS TABLE ===== */
   .standings-note {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-left: 6px solid var(--yellow);
     padding: 22px 24px;
     margin-top: 18px;
     font-size: .9rem;
-    color: var(--silver);
+    color: var(--muted);
   }
-  .standings-note p { margin-bottom: 8px; color: var(--white); font-weight: 600; }
+  .standings-note p { margin-bottom: 8px; color: var(--ink); font-family: 'Anton', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; font-size: 1rem; }
   .standings-note ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
   .standings-note li { line-height: 1.6; }
-  .standings-note li strong { color: var(--white); }
+  .standings-note li strong { color: var(--ink); }
   .table-wrap {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 18px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
   table {
     width: 100%;
@@ -353,45 +385,41 @@
   }
   thead th {
     background: var(--surface-2);
-    color: var(--silver);
+    color: var(--muted);
     text-align: center;
     padding: 16px 12px;
     font-size: .78rem;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 800;
+    border-bottom: 2px solid var(--orange);
   }
   thead th:first-child, tbody td:first-child { text-align: left; }
   tbody td {
     padding: 15px 12px;
     text-align: center;
     border-bottom: 1px solid var(--border);
+    font-weight: 600;
   }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr { transition: background .15s; }
+  tbody tr { transition: background .15s, transform .15s; }
   tbody tr:hover { background: var(--surface-2); }
-  .rank-1 td:first-child { font-weight: 800; color: var(--blue); }
-  .team-cell { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+  .rank-1 td:first-child { font-weight: 900; color: var(--orange); }
+  .team-cell { display: flex; align-items: center; gap: 12px; font-weight: 700; }
   .team-cell .dot {
     width: 28px; height: 28px;
-    border-radius: 10px;
     display: inline-flex; align-items: center; justify-content: center;
-    color: #000; font-size: .78rem; font-weight: 800;
+    color: #0a0e1a; font-size: .8rem; font-weight: 900;
     flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,0.3);
+    transform: skewX(-6deg);
   }
-  .tbl-hint {
-    color: var(--silver);
-    font-size: .82rem;
-    margin-top: 12px;
-    font-weight: 300;
-  }
+  .tbl-hint { color: var(--muted); font-size: .82rem; margin-top: 12px; font-weight: 500; }
 
   /* ===== FIXTURES ===== */
   .fixture {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-left: 6px solid var(--blue);
     padding: 20px 24px;
     margin-bottom: 14px;
     display: flex;
@@ -399,49 +427,48 @@
     justify-content: space-between;
     gap: 16px;
     flex-wrap: wrap;
-    transition: border-color .15s;
+    transition: transform .15s, border-color .15s;
   }
-  .fixture:hover { border-color: var(--blue); }
+  .fixture:hover { transform: translateX(6px); border-left-color: var(--orange); }
   .fixture .teams {
     display: flex;
     align-items: center;
     gap: 14px;
     flex-wrap: wrap;
-    grid-template-columns: none;
   }
-  .fixture .t { display: flex; align-items: center; gap: 10px; font-weight: 600; }
-  .fixture .t .dot { width: 24px; height: 24px; border-radius: 8px; font-size: .68rem; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; border: 1px solid rgba(255,255,255,0.3); }
-  .fixture .vs { color: var(--ghost); font-weight: 700; font-size: .78rem; letter-spacing: 1px; }
-  .fixture .score { font-weight: 700; font-size: 1.1rem; color: var(--blue); letter-spacing: 0.02em; font-family: 'Azeret Mono', monospace; }
-  .fixture .meta { text-align: right; font-size: .82rem; color: var(--silver); }
-  .fixture .meta .week { font-weight: 700; color: var(--blue); letter-spacing: 1px; font-size: .72rem; text-transform: uppercase; }
-  .fix-hint {
-    color: var(--silver);
-    font-size: .82rem;
-    margin-top: 14px;
-    font-weight: 300;
-  }
+  .fixture .t { display: flex; align-items: center; gap: 10px; font-weight: 700; font-family: 'Anton', sans-serif; letter-spacing: 0.04em; font-size: .95rem; }
+  .fixture .t .dot { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; color: #0a0e1a; transform: skewX(-6deg); }
+  .fixture .vs { color: var(--muted); font-weight: 900; font-size: .8rem; letter-spacing: 2px; }
+  .fixture .score { font-weight: 800; font-size: 1.15rem; color: var(--ink); letter-spacing: 0.02em; }
+  .fixture .meta { text-align: right; font-size: .82rem; color: var(--muted); }
+  .fixture .meta .week { font-family: 'Anton', sans-serif; color: var(--yellow); letter-spacing: 1.5px; font-size: .78rem; text-transform: uppercase; }
+  .fix-hint { color: var(--muted); font-size: .82rem; margin-top: 14px; font-weight: 500; }
 
   footer {
     background: var(--surface);
     border-top: 1px solid var(--border);
-    color: var(--silver);
+    color: var(--muted);
     text-align: center;
     padding: 34px 20px;
     font-size: .85rem;
     margin-top: 20px;
   }
-  footer strong { color: var(--white); }
+  footer strong { color: var(--ink); }
 
   /* ===== TAB CONTENT ===== */
   .tab-content { display: none; }
-  .tab-content.active { display: block; animation: fadeIn .25s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .tab-content.active { display: block; animation: slideIn .3s ease; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: none; }
+  }
 
   @media (max-width: 640px) {
-    .hero { padding: 80px 16px 64px; }
+    .hero { padding: 78px 16px 64px; }
+    .hero h1 { transform: none; }
+    .section-title { transform: none; }
     .fixture .meta { text-align: left; width: 100%; }
-    nav a { padding: 15px 12px; font-size: .82rem; }
+    nav a { padding: 15px 12px; font-size: .78rem; }
     .about, .squad-card { padding: 22px; }
   }
 </style>
@@ -450,10 +477,10 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <div class="badge">Internal Basketball League</div>
-  <h1>DREAM TEAM <span class="hl-blue">INTERNAL LEAGUE</span></h1>
+  <div class="badge"><span>🏀 Internal Basketball League</span></div>
+  <h1>DREAM TEAM <span class="hl">INTERNAL</span> <span class="hl2">LEAGUE</span></h1>
   <div class="sub">Kompetisi internal antar tim yang penuh semangat dan sportivitas.</div>
-  <div class="season-tag">Season 1</div>
+  <div class="season-tag"><span>Season 1</span></div>
 </header>
 
 <!-- ================= NAV ================= -->
@@ -468,7 +495,7 @@
 
 <!-- ================= ABOUT ================= -->
 <section id="about" class="tab-content active">
-  <h2 class="section-title"><span class="accent-dot"></span> Tentang Liga</h2>
+  <h2 class="section-title"><span class="num">01</span> Tentang Liga</h2>
   <div class="about">
     <p class="about-lead"><span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah ajang kompetisi basket internal yang
     mempertemukan <span class="hl">4 tim terbaik</span> dalam satu musim penuh gengsi — <span class="hl">Season 1</span>.</p>
@@ -477,25 +504,25 @@
       <div class="about-card">
         <div class="ac-icon">◈</div>
         <div class="ac-label">Sistem Kompetisi</div>
-        <div class="ac-value">Round Robin</div>
+        <div class="ac-value">ROUND ROBIN</div>
         <div class="ac-desc">Setiap tim saling bertemu satu sama lain untuk memperebutkan gelar juara.</div>
       </div>
       <div class="about-card">
         <div class="ac-icon">▦</div>
         <div class="ac-label">Tim Peserta</div>
-        <div class="ac-value">4 Tim</div>
+        <div class="ac-value">4 TIM</div>
         <div class="ac-desc">BLUE DRAGON • RED PHOENIX • WHITE TIGER • GOLDEN KIRIN</div>
       </div>
       <div class="about-card">
         <div class="ac-icon">◫</div>
         <div class="ac-label">Klasemen</div>
-        <div class="ac-value">Game • Win • Lose • Poin</div>
+        <div class="ac-value">GAME • WIN • LOSE • POIN</div>
         <div class="ac-desc">Sistem klasemen standar bola basket untuk menentukan peringkat.</div>
       </div>
       <div class="about-card">
         <div class="ac-icon">◇</div>
         <div class="ac-label">Semangat</div>
-        <div class="ac-value">Fair Play</div>
+        <div class="ac-value">FAIR PLAY</div>
         <div class="ac-desc">Junjung sportivitas, hormati lawan, dan berikan yang terbaik di setiap pertandingan.</div>
       </div>
     </div>
@@ -506,7 +533,7 @@
 
 <!-- ================= TEAMS ================= -->
 <section id="teams" class="tab-content">
-  <h2 class="section-title"><span class="accent-dot"></span> Team &amp; Player</h2>
+  <h2 class="section-title"><span class="num">02</span> Team &amp; Player</h2>
 
   <!-- Daftar Tim (grid) -->
   <div id="team-grid">
@@ -537,7 +564,7 @@
 
   <!-- Detail Squad (tampil saat klik tim) -->
   <div id="team-detail" style="display:none;">
-    <button class="btn-back" onclick="showTeamGrid()">← Kembali ke Daftar Tim</button>
+    <button class="btn-back" onclick="showTeamGrid()"><span>← Kembali ke Daftar Tim</span></button>
     <div id="team-detail-content"></div>
   </div>
 </section>
@@ -551,16 +578,16 @@
       <h3>BLUE DRAGON</h3>
     </div>
     <div class="player-list">
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">DRAGON1</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">DRAGON2</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">DRAGON3</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">DRAGON4</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">DRAGON5</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">DRAGON6</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">DRAGON7</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">DRAGON8</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">DRAGON9</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">DRAGON10</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>1</span></span><span class="p-name">DRAGON1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>2</span></span><span class="p-name">DRAGON2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>3</span></span><span class="p-name">DRAGON3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>4</span></span><span class="p-name">DRAGON4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>5</span></span><span class="p-name">DRAGON5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>6</span></span><span class="p-name">DRAGON6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>7</span></span><span class="p-name">DRAGON7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>8</span></span><span class="p-name">DRAGON8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>9</span></span><span class="p-name">DRAGON9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>10</span></span><span class="p-name">DRAGON10</span></div>
     </div>
   </div>
 
@@ -570,16 +597,16 @@
       <h3>RED PHOENIX</h3>
     </div>
     <div class="player-list">
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">PHOENIX1</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">PHOENIX2</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">PHOENIX3</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">PHOENIX4</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">PHOENIX5</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">PHOENIX6</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">PHOENIX7</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">PHOENIX8</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">PHOENIX9</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">PHOENIX10</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>1</span></span><span class="p-name">PHOENIX1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>2</span></span><span class="p-name">PHOENIX2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>3</span></span><span class="p-name">PHOENIX3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>4</span></span><span class="p-name">PHOENIX4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>5</span></span><span class="p-name">PHOENIX5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>6</span></span><span class="p-name">PHOENIX6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>7</span></span><span class="p-name">PHOENIX7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>8</span></span><span class="p-name">PHOENIX8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>9</span></span><span class="p-name">PHOENIX9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>10</span></span><span class="p-name">PHOENIX10</span></div>
     </div>
   </div>
 
@@ -589,16 +616,16 @@
       <h3>WHITE TIGER</h3>
     </div>
     <div class="player-list">
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">TIGER1</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">TIGER2</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">TIGER3</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">TIGER4</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">TIGER5</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">TIGER6</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">TIGER7</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">TIGER8</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">TIGER9</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">TIGER10</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>1</span></span><span class="p-name">TIGER1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>2</span></span><span class="p-name">TIGER2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>3</span></span><span class="p-name">TIGER3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>4</span></span><span class="p-name">TIGER4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>5</span></span><span class="p-name">TIGER5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>6</span></span><span class="p-name">TIGER6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>7</span></span><span class="p-name">TIGER7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>8</span></span><span class="p-name">TIGER8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>9</span></span><span class="p-name">TIGER9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>10</span></span><span class="p-name">TIGER10</span></div>
     </div>
   </div>
 
@@ -608,16 +635,16 @@
       <h3>GOLDEN KIRIN</h3>
     </div>
     <div class="player-list">
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">1</span><span class="p-name">KIRIN1</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">2</span><span class="p-name">KIRIN2</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">3</span><span class="p-name">KIRIN3</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">4</span><span class="p-name">KIRIN4</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">5</span><span class="p-name">KIRIN5</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">6</span><span class="p-name">KIRIN6</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">7</span><span class="p-name">KIRIN7</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">8</span><span class="p-name">KIRIN8</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">9</span><span class="p-name">KIRIN9</span></div>
-      <div class="player-row"><div class="p-photo"></div><span class="p-num">10</span><span class="p-name">KIRIN10</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>1</span></span><span class="p-name">KIRIN1</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>2</span></span><span class="p-name">KIRIN2</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>3</span></span><span class="p-name">KIRIN3</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>4</span></span><span class="p-name">KIRIN4</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>5</span></span><span class="p-name">KIRIN5</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>6</span></span><span class="p-name">KIRIN6</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>7</span></span><span class="p-name">KIRIN7</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>8</span></span><span class="p-name">KIRIN8</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>9</span></span><span class="p-name">KIRIN9</span></div>
+      <div class="player-row"><div class="p-photo"></div><span class="p-num"><span>10</span></span><span class="p-name">KIRIN10</span></div>
     </div>
   </div>
 </div>
@@ -641,7 +668,7 @@
      💡 Ganti juga posisi urutan baris (rank) kalau ada yang naik/turun.
      ============================================================ -->
 <section id="standings" class="tab-content">
-  <h2 class="section-title"><span class="accent-dot"></span> Klasemen</h2>
+  <h2 class="section-title"><span class="num">03</span> Klasemen</h2>
   <div class="table-wrap">
     <table>
       <thead>
@@ -657,22 +684,22 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td><div class="team-cell"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:var(--blue);">B</span> BLUE DRAGON</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>2</td>
-          <td><div class="team-cell"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:var(--gold);">G</span> GOLDEN KIRIN</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>3</td>
-          <td><div class="team-cell"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:var(--red);">R</span> RED PHOENIX</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>4</td>
-          <td><div class="team-cell"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:var(--white-t);">W</span> WHITE TIGER</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
       </tbody>
@@ -700,14 +727,14 @@
      (GAME/WIN/LOSE/POIN tiap tim).
      ============================================================ -->
 <section id="fixtures" class="tab-content">
-  <h2 class="section-title"><span class="accent-dot"></span> Jadwal &amp; Hasil Pertandingan</h2>
+  <h2 class="section-title"><span class="num">04</span> Jadwal &amp; Hasil</h2>
 
   <!-- Week 1 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:var(--blue);">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:var(--red);">R</span> RED PHOENIX</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
@@ -718,9 +745,9 @@
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:var(--white-t);">W</span> WHITE TIGER</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:var(--gold);">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
@@ -732,9 +759,9 @@
   <!-- Week 2 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:var(--blue);">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:var(--white-t);">W</span> WHITE TIGER</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
@@ -745,9 +772,9 @@
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:var(--red);">R</span> RED PHOENIX</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:var(--gold);">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
@@ -759,9 +786,9 @@
   <!-- Week 3 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:var(--blue);">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:var(--gold);">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
@@ -772,9 +799,9 @@
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:var(--red);">R</span> RED PHOENIX</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:var(--white-t);">W</span> WHITE TIGER</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
