@@ -4,316 +4,345 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DREAM TEAM INTERNAL LEAGUE — Season 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #1a2a5e;
-    --accent: #ff7a00;
-    --accent2: #ffb800;
-    --dark: #0f172a;
-    --bg: #f4f6fb;
-    --card: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e2e8f0;
+    --void: #000000;
+    --surface: #090909;
+    --surface-2: #111111;
+    --white: #ffffff;
+    --silver: #a6a6a6;
+    --ghost: rgba(255, 255, 255, 0.6);
+    --frosted: rgba(255, 255, 255, 0.1);
+    --frosted-2: rgba(255, 255, 255, 0.5);
+    --blue: #0099ff;
+    --blue-glow: rgba(0, 153, 255, 0.15);
+    --border: rgba(255, 255, 255, 0.1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Segoe UI', -apple-system, Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: var(--void);
+    color: var(--white);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ===== HERO ===== */
   .hero {
     position: relative;
-    background: linear-gradient(135deg, #0f172a 0%, #1a2a5e 55%, #2b3f8f 100%);
+    background: var(--void);
     color: #fff;
     text-align: center;
-    padding: 80px 20px 70px;
+    padding: 110px 20px 90px;
     overflow: hidden;
   }
   .hero::before {
     content: "";
     position: absolute;
-    top: -60%; left: -10%;
-    width: 120%; height: 200%;
-    background: radial-gradient(circle at 20% 30%, rgba(255,122,0,.25), transparent 45%),
-                radial-gradient(circle at 80% 70%, rgba(255,184,0,.18), transparent 45%);
+    top: -40%; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse at center, rgba(0,153,255,0.12), transparent 65%);
     pointer-events: none;
   }
   .hero .badge {
     display: inline-block;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.25);
-    padding: 6px 18px;
-    border-radius: 30px;
-    font-size: .8rem;
-    letter-spacing: 2px;
+    background: var(--frosted);
+    border: 1px solid var(--border);
+    padding: 8px 22px;
+    border-radius: 100px;
+    font-size: .75rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    color: var(--silver);
+    margin-bottom: 24px;
+    position: relative;
   }
   .hero h1 {
-    font-size: clamp(2rem, 6vw, 3.6rem);
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
+    font-size: clamp(2.6rem, 8vw, 5.5rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 10px;
     position: relative;
   }
-  .hero h1 span { color: var(--accent2); }
+  .hero h1 .hl-blue { color: var(--blue); }
   .hero .sub {
-    font-size: 1.05rem;
-    color: #cbd5e1;
-    max-width: 640px;
-    margin: 10px auto 22px;
+    font-size: 1.1rem;
+    color: var(--silver);
+    max-width: 560px;
+    margin: 18px auto 30px;
     position: relative;
+    font-weight: 300;
   }
   .hero .season-tag {
     display: inline-block;
-    background: var(--accent);
-    color: #fff;
+    background: var(--white);
+    color: #000;
     font-weight: 700;
-    padding: 8px 26px;
-    border-radius: 8px;
-    font-size: .95rem;
-    box-shadow: 0 6px 20px rgba(255,122,0,.4);
+    padding: 12px 32px;
+    border-radius: 100px;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     position: relative;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 30px rgba(0,153,255,0.2);
   }
+  .hero .season-tag:hover { transform: scale(1.04); }
 
   /* ===== NAV ===== */
   nav {
-    background: #fff;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
   }
   nav .inner {
-    max-width: 1080px;
+    max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    gap: 6px;
+    gap: 4px;
     padding: 0 20px;
     overflow-x: auto;
   }
   nav a {
     display: inline-block;
-    padding: 16px 18px;
-    color: var(--text);
+    padding: 18px 20px;
+    color: var(--silver);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: .9rem;
-    border-bottom: 3px solid transparent;
+    border-radius: 0 0 8px 8px;
     white-space: nowrap;
+    transition: color .15s, background .15s;
   }
-  nav a:hover { color: var(--primary); border-bottom-color: var(--accent); }
+  nav a:hover { color: var(--white); background: var(--frosted); }
+  nav .nav-link.active {
+    color: var(--blue);
+    background: var(--blue-glow);
+  }
 
   /* ===== SECTIONS ===== */
-  section { max-width: 1080px; margin: 0 auto; padding: 50px 20px; }
+  section { max-width: 1100px; margin: 0 auto; padding: 64px 20px; }
   .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 28px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 24px;
+    gap: 14px;
   }
-  .section-title::after {
-    content: "";
-    flex: 1;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    border-radius: 3px;
+  .section-title .accent-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 12px var(--blue);
+    flex-shrink: 0;
   }
 
   /* ===== ABOUT ===== */
   .about {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px;
-    box-shadow: 0 4px 14px rgba(15,23,42,.05);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
-  .about p { color: var(--muted); margin-bottom: 12px; }
-  .about p:last-child { margin-bottom: 0; }
-  .about .hl { color: var(--primary); font-weight: 700; }
-  .about .about-lead { font-size: 1.05rem; line-height: 1.7; margin-bottom: 22px; }
+  .about .about-lead {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--silver);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .about .about-lead .hl { color: var(--white); font-weight: 600; }
   .about-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
   }
   .about-card {
-    background: #f8fafc;
+    background: var(--surface-2);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
+    border-radius: 14px;
+    padding: 24px 18px;
     text-align: center;
-    transition: transform .15s, box-shadow .15s;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
   }
-  .about-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(15,23,42,.1); }
-  .about-card .ac-icon { font-size: 1.7rem; margin-bottom: 8px; }
+  .about-card:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: var(--blue-glow) 0px 0px 0px 1px; }
+  .about-card .ac-icon { font-size: 1.6rem; margin-bottom: 12px; color: var(--blue); }
   .about-card .ac-label {
-    font-size: .7rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 4px;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--ghost);
+    margin-bottom: 6px;
+    text-transform: uppercase;
   }
-  .about-card .ac-value { font-weight: 800; color: var(--primary); margin-bottom: 6px; }
-  .about-card .ac-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .about-card .ac-value { font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .about-card .ac-desc { font-size: .82rem; color: var(--silver); line-height: 1.55; }
   .about .about-closing {
     text-align: center;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--primary);
-    padding-top: 6px;
+    color: var(--white);
+    padding-top: 20px;
     border-top: 1px solid var(--border);
     margin-bottom: 0;
+    letter-spacing: -0.01em;
   }
 
   /* ===== TEAMS GRID ===== */
   .teams {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
     margin-top: 8px;
   }
   .team-card {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 28px 20px;
     text-align: center;
-    transition: transform .15s, box-shadow .15s;
+    cursor: pointer;
+    transition: transform .18s, box-shadow .18s, border-color .18s;
   }
-  .team-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(15,23,42,.1); }
-  .team-card .dot {
-    width: 46px; height: 46px;
-    border-radius: 12px;
-    margin: 0 auto 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; font-weight: 800; color: #fff;
-  }
+  .team-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: var(--blue-glow) 0px 0px 0px 1px, rgba(0,0,0,0.25) 0px 10px 30px; }
   .team-logo {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
-    margin: 0 auto 12px;
+    margin: 0 auto 18px;
     display: block;
-    border-radius: 12px;
-    background: #0b0e14;
-  }
-  .team-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
-  .team-card .t-tag { font-size: .78rem; color: var(--muted); }
-
-  /* ===== PLAYERS / SQUAD ===== */
-  .squad-card {
-    background: #fff;
+    border-radius: 16px;
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 4px 14px rgba(15,23,42,.05);
   }
-  .squad-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 14px;
+  .team-card h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .team-card .t-tag { font-size: .75rem; color: var(--silver); letter-spacing: 1px; text-transform: uppercase; }
+  .grid-hint {
+    color: var(--silver);
+    font-size: .85rem;
+    text-align: center;
+    margin-top: 18px;
+    font-weight: 300;
+  }
+  .grid-hint .arrow { color: var(--blue); }
+
+  /* ===== SQUAD / PLAYERS ===== */
+  .squad-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
   .squad-head {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
   }
-  .squad-head h3 { font-size: 1.4rem; color: var(--primary); }
+  .squad-head h3 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; }
   .squad-logo {
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
     border-radius: 12px;
-    background: #0b0e14;
+    border: 1px solid var(--border);
   }
   .btn-back {
-    display: inline-block;
-    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--frosted);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 18px;
+    border-radius: 100px;
+    padding: 12px 24px;
     font-size: .9rem;
-    font-weight: 700;
-    color: var(--primary);
+    font-weight: 600;
+    color: var(--white);
     cursor: pointer;
-    margin-bottom: 16px;
-    transition: background .15s;
+    margin-bottom: 20px;
+    transition: background .15s, transform .15s;
   }
-  .btn-back:hover { background: #f1f5f9; }
-  .team-card { cursor: pointer; }
-  .player-list { display: flex; flex-direction: column; gap: 6px; }
+  .btn-back:hover { background: var(--frosted-2); transform: translateX(-2px); }
+  .player-list { display: flex; flex-direction: column; gap: 8px; }
   .player-row {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 6px 8px;
-    border-radius: 10px;
-    background: #f8fafc;
+    gap: 14px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: var(--surface-2);
     border: 1px solid var(--border);
+    transition: border-color .15s;
   }
-  .player-row:hover { background: #f1f5f9; }
+  .player-row:hover { border-color: var(--blue); }
   .p-photo {
-    width: 40px; height: 40px;
+    width: 42px; height: 42px;
     border-radius: 50%;
-    background: #e2e8f0;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>');
+    background: #1a1a1a;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50% 50%;
-    border: 2px dashed #cbd5e1;
+    border: 2px dashed rgba(255,255,255,0.2);
     flex-shrink: 0;
   }
   .p-num {
-    width: 26px; height: 26px;
+    width: 28px; height: 28px;
     border-radius: 50%;
-    background: var(--primary);
-    color: #fff;
+    background: var(--blue-glow);
+    border: 1px solid var(--blue);
+    color: var(--blue);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: .78rem;
     font-weight: 700;
     flex-shrink: 0;
+    font-family: 'Azeret Mono', monospace;
   }
-  .p-name { font-weight: 700; color: var(--text); }
+  .p-name { font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
 
   /* ===== STANDINGS TABLE ===== */
   .standings-note {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-top: 14px;
-    font-size: .88rem;
-    color: var(--muted);
-  }
-  .standings-note p { margin-bottom: 6px; color: var(--primary); }
-  .standings-note ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
-  .standings-note li { line-height: 1.6; }
-  .table-wrap {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 18px;
+    font-size: .9rem;
+    color: var(--silver);
+  }
+  .standings-note p { margin-bottom: 8px; color: var(--white); font-weight: 600; }
+  .standings-note ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .standings-note li { line-height: 1.6; }
+  .standings-note li strong { color: var(--white); }
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(15,23,42,.05);
+    box-shadow: var(--blue-glow) 0px 0px 0px 1px;
   }
   table {
     width: 100%;
@@ -321,46 +350,56 @@
     font-size: .92rem;
   }
   thead th {
-    background: var(--primary);
-    color: #fff;
+    background: var(--surface-2);
+    color: var(--silver);
     text-align: center;
-    padding: 13px 10px;
-    font-size: .85rem;
-    letter-spacing: .5px;
+    padding: 16px 12px;
+    font-size: .78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
   }
   thead th:first-child, tbody td:first-child { text-align: left; }
   tbody td {
-    padding: 13px 10px;
+    padding: 15px 12px;
     text-align: center;
     border-bottom: 1px solid var(--border);
   }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover { background: #f8fafc; }
-  .rank-1 { background: #fff7ed !important; }
-  .rank-1 td:first-child { font-weight: 800; color: var(--accent); }
-  .team-cell { display: flex; align-items: center; gap: 10px; }
+  tbody tr { transition: background .15s; }
+  tbody tr:hover { background: var(--surface-2); }
+  .rank-1 td:first-child { font-weight: 800; color: var(--blue); }
+  .team-cell { display: flex; align-items: center; gap: 12px; font-weight: 600; }
   .team-cell .dot {
-    width: 26px; height: 26px;
-    border-radius: 8px;
+    width: 28px; height: 28px;
+    border-radius: 10px;
     display: inline-flex; align-items: center; justify-content: center;
-    color: #fff; font-size: .75rem; font-weight: 700;
+    color: #000; font-size: .78rem; font-weight: 800;
     flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .tbl-hint {
+    color: var(--silver);
+    font-size: .82rem;
+    margin-top: 12px;
+    font-weight: 300;
   }
 
   /* ===== FIXTURES ===== */
   .fixture {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 12px;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     flex-wrap: wrap;
-    box-shadow: 0 2px 8px rgba(15,23,42,.04);
+    transition: border-color .15s;
   }
+  .fixture:hover { border-color: var(--blue); }
   .fixture .teams {
     display: flex;
     align-items: center;
@@ -368,42 +407,40 @@
     flex-wrap: wrap;
     grid-template-columns: none;
   }
-  .fixture .t { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .fixture .t .dot { width: 22px; height: 22px; border-radius: 6px; font-size: .65rem; }
-  .fixture .vs { color: var(--muted); font-weight: 700; font-size: .8rem; }
-  .fixture .score { font-weight: 800; font-size: 1.05rem; color: var(--primary); }
-  .fixture .meta { text-align: right; font-size: .8rem; color: var(--muted); }
-  .fixture .meta .week { font-weight: 700; color: var(--accent); }
-  .status-live {
-    background: #ef4444; color: #fff;
-    font-size: .68rem; font-weight: 800;
-    padding: 3px 8px; border-radius: 20px;
-    letter-spacing: 1px;
-    animation: pulse 1.5s infinite;
+  .fixture .t { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .fixture .t .dot { width: 24px; height: 24px; border-radius: 8px; font-size: .68rem; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; border: 1px solid rgba(255,255,255,0.3); }
+  .fixture .vs { color: var(--ghost); font-weight: 700; font-size: .78rem; letter-spacing: 1px; }
+  .fixture .score { font-weight: 700; font-size: 1.1rem; color: var(--blue); letter-spacing: 0.02em; font-family: 'Azeret Mono', monospace; }
+  .fixture .meta { text-align: right; font-size: .82rem; color: var(--silver); }
+  .fixture .meta .week { font-weight: 700; color: var(--blue); letter-spacing: 1px; font-size: .72rem; text-transform: uppercase; }
+  .fix-hint {
+    color: var(--silver);
+    font-size: .82rem;
+    margin-top: 14px;
+    font-weight: 300;
   }
-  @keyframes pulse { 50% { opacity: .55; } }
 
   footer {
-    background: var(--dark);
-    color: #94a3b8;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    color: var(--silver);
     text-align: center;
-    padding: 28px 20px;
+    padding: 34px 20px;
     font-size: .85rem;
     margin-top: 20px;
   }
-  footer strong { color: #fff; }
+  footer strong { color: var(--white); }
 
   /* ===== TAB CONTENT ===== */
   .tab-content { display: none; }
-  .tab-content.active { display: block; }
-  nav .nav-link.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
+  .tab-content.active { display: block; animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
   @media (max-width: 640px) {
+    .hero { padding: 80px 16px 64px; }
     .fixture .meta { text-align: left; width: 100%; }
-    nav a { padding: 14px 12px; font-size: .82rem; }
+    nav a { padding: 15px 12px; font-size: .82rem; }
+    .about, .squad-card { padding: 22px; }
   }
 </style>
 </head>
@@ -411,10 +448,10 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <div class="badge">🏀 Internal Basketball League</div>
-  <h1>DREAM TEAM <span>INTERNAL LEAGUE</span></h1>
+  <div class="badge">Internal Basketball League</div>
+  <h1>DREAM TEAM <span class="hl-blue">INTERNAL LEAGUE</span></h1>
   <div class="sub">Kompetisi internal antar tim yang penuh semangat dan sportivitas.</div>
-  <div class="season-tag">SEASON 1</div>
+  <div class="season-tag">Season 1</div>
 </header>
 
 <!-- ================= NAV ================= -->
@@ -429,33 +466,33 @@
 
 <!-- ================= ABOUT ================= -->
 <section id="about" class="tab-content active">
-  <h2 class="section-title">Tentang Liga</h2>
+  <h2 class="section-title"><span class="accent-dot"></span> Tentang Liga</h2>
   <div class="about">
-    <p class="about-lead">🏀 <span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah ajang kompetisi basket internal yang
+    <p class="about-lead"><span class="hl">DREAM TEAM INTERNAL LEAGUE</span> adalah ajang kompetisi basket internal yang
     mempertemukan <span class="hl">4 tim terbaik</span> dalam satu musim penuh gengsi — <span class="hl">Season 1</span>.</p>
 
     <div class="about-cards">
       <div class="about-card">
-        <div class="ac-icon">🏆</div>
-        <div class="ac-label">SISTEM KOMPETISI</div>
+        <div class="ac-icon">◈</div>
+        <div class="ac-label">Sistem Kompetisi</div>
         <div class="ac-value">Round Robin</div>
         <div class="ac-desc">Setiap tim saling bertemu satu sama lain untuk memperebutkan gelar juara.</div>
       </div>
       <div class="about-card">
-        <div class="ac-icon">👥</div>
-        <div class="ac-label">TIM PESERTA</div>
+        <div class="ac-icon">▦</div>
+        <div class="ac-label">Tim Peserta</div>
         <div class="ac-value">4 Tim</div>
         <div class="ac-desc">BLUE DRAGON • RED PHOENIX • WHITE TIGER • GOLDEN KIRIN</div>
       </div>
       <div class="about-card">
-        <div class="ac-icon">📊</div>
-        <div class="ac-label">KLASEMEN</div>
+        <div class="ac-icon">◫</div>
+        <div class="ac-label">Klasemen</div>
         <div class="ac-value">Game • Win • Lose • Poin</div>
         <div class="ac-desc">Sistem klasemen standar bola basket untuk menentukan peringkat.</div>
       </div>
       <div class="about-card">
-        <div class="ac-icon">🎯</div>
-        <div class="ac-label">SEMANGAT</div>
+        <div class="ac-icon">◇</div>
+        <div class="ac-label">Semangat</div>
         <div class="ac-value">Fair Play</div>
         <div class="ac-desc">Junjung sportivitas, hormati lawan, dan berikan yang terbaik di setiap pertandingan.</div>
       </div>
@@ -467,7 +504,7 @@
 
 <!-- ================= TEAMS ================= -->
 <section id="teams" class="tab-content">
-  <h2 class="section-title">Team &amp; Player</h2>
+  <h2 class="section-title"><span class="accent-dot"></span> Team &amp; Player</h2>
 
   <!-- Daftar Tim (grid) -->
   <div id="team-grid">
@@ -493,12 +530,12 @@
         <div class="t-tag">Tim 4</div>
       </div>
     </div>
-    <p style="color:var(--muted); font-size:.8rem; text-align:center; margin-top:14px;">👆 Klik salah satu tim untuk melihat daftar pemainnya.</p>
+    <p class="grid-hint"><span class="arrow">→</span> Klik salah satu tim untuk melihat daftar pemainnya.</p>
   </div>
 
   <!-- Detail Squad (tampil saat klik tim) -->
   <div id="team-detail" style="display:none;">
-    <button class="btn-back" onclick="showTeamGrid()">&larr; Kembali ke Daftar Tim</button>
+    <button class="btn-back" onclick="showTeamGrid()">← Kembali ke Daftar Tim</button>
     <div id="team-detail-content"></div>
   </div>
 </section>
@@ -602,7 +639,7 @@
      💡 Ganti juga posisi urutan baris (rank) kalau ada yang naik/turun.
      ============================================================ -->
 <section id="standings" class="tab-content">
-  <h2 class="section-title">Klasemen</h2>
+  <h2 class="section-title"><span class="accent-dot"></span> Klasemen</h2>
   <div class="table-wrap">
     <table>
       <thead>
@@ -618,29 +655,29 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td><div class="team-cell"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>2</td>
-          <td><div class="team-cell"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>3</td>
-          <td><div class="team-cell"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr>
           <td>4</td>
-          <td><div class="team-cell"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div></td>
+          <td><div class="team-cell"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div></td>
           <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="standings-note">
-    <p><strong>📊 Sistem Klasemen</strong></p>
+    <p>📊 Sistem Klasemen</p>
     <ul>
       <li>Klasemen disusun berdasarkan <strong>hasil pertandingan</strong> — setiap tim yang <strong>menang mendapat 2 poin</strong>, sementara tim yang <strong>kalah mendapat 1 poin</strong>.</li>
       <li>Jika terdapat tim dengan <strong>poin yang sama</strong>, prioritas diberikan pada <strong>hasil head to head</strong> antara kedua tim tersebut — tim yang menang berhak menempati peringkat lebih tinggi.</li>
@@ -661,31 +698,31 @@
      (GAME/WIN/LOSE/POIN tiap tim).
      ============================================================ -->
 <section id="fixtures" class="tab-content">
-  <h2 class="section-title">Jadwal &amp; Hasil Pertandingan</h2>
+  <h2 class="section-title"><span class="accent-dot"></span> Jadwal &amp; Hasil Pertandingan</h2>
 
   <!-- Week 1 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 1 • GAME 1</div>
+      <div class="week">Week 1 • Game 1</div>
       <div>Jumat, 09 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 1 • GAME 2</div>
+      <div class="week">Week 1 • Game 2</div>
       <div>Jumat, 09 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
@@ -693,26 +730,26 @@
   <!-- Week 2 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 2 • GAME 3</div>
+      <div class="week">Week 2 • Game 3</div>
       <div>Jumat, 16 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 2 • GAME 4</div>
+      <div class="week">Week 2 • Game 4</div>
       <div>Jumat, 16 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
@@ -720,38 +757,36 @@
   <!-- Week 3 -->
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#1565c0;">B</span> BLUE DRAGON</div>
+      <div class="t"><span class="dot" style="background:#4da6ff;">B</span> BLUE DRAGON</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#b8860b;">G</span> GOLDEN KIRIN</div>
+      <div class="t"><span class="dot" style="background:#f5c542;">G</span> GOLDEN KIRIN</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 3 • GAME 5</div>
+      <div class="week">Week 3 • Game 5</div>
       <div>Jumat, 23 Okt 2026 • 19.00 – 20.15 WIB</div>
     </div>
   </div>
 
   <div class="fixture">
     <div class="teams">
-      <div class="t"><span class="dot" style="background:#c62828;">R</span> RED PHOENIX</div>
+      <div class="t"><span class="dot" style="background:#ff6b6b;">R</span> RED PHOENIX</div>
       <div class="vs">VS</div>
-      <div class="t"><span class="dot" style="background:#eceff1;">W</span> WHITE TIGER</div>
+      <div class="t"><span class="dot" style="background:#e8e8e8;">W</span> WHITE TIGER</div>
       <div class="score">— : —</div>
     </div>
     <div class="meta">
-      <div class="week">WEEK 3 • GAME 6</div>
+      <div class="week">Week 3 • Game 6</div>
       <div>Jumat, 23 Okt 2026 • 20.30 – 21.45 WIB</div>
     </div>
   </div>
 
-  <p style="color:var(--muted); font-size:.8rem; margin-top:12px;">
-    * Jadwal lengkap akan diumumkan oleh penyelenggara. Semua tim saling bertemu satu kali (sistem round robin).
-  </p>
+  <p class="fix-hint">* Jadwal lengkap akan diumumkan oleh penyelenggara. Semua tim saling bertemu satu kali (sistem round robin).</p>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer>
-  <strong>DREAM TEAM INTERNAL LEAGUE</strong> — Season 1 &bull; © 2026<br>
+  <strong>DREAM TEAM INTERNAL LEAGUE</strong> — Season 1 • © 2026<br>
   Dibuat untuk tontonan publik. Semoga sukses dan tetap sportif! 🏀
 </footer>
 
