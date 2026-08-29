@@ -21,6 +21,7 @@
     --red: #ff3b3b;
     --gold: #f5c542;
     --white-t: #e8e8e8;
+    --bb-svg: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2711%27 fill=%27%23e8721f%27 stroke=%27%23111%27 stroke-width=%271.4%27/%3E%3Cg stroke=%27%23111%27 stroke-width=%271.4%27 fill=%27none%27%3E%3Cpath d=%27M12 1v22%27/%3E%3Cpath d=%27M1 12h22%27/%3E%3Cpath d=%27M12 1C5.5 5.5 5.5 18.5 12 23%27/%3E%3Cpath d=%27M12 1c6.5 4.5 6.5 17.5 0 22%27/%3E%3C/g%3E%3C/svg%3E');
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -463,6 +464,110 @@
     to { opacity: 1; transform: none; }
   }
 
+  /* ===== BASKETBALL ANIMATIONS ===== */
+  @keyframes bb-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px) scaleY(0.9); }
+  }
+  @keyframes bb-spin-bounce {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(120deg) translateY(-18px); }
+    50% { transform: rotate(240deg) translateY(0) scaleY(0.92); }
+    75% { transform: rotate(360deg) translateY(-14px); }
+  }
+  @keyframes bb-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes bb-drop {
+    0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    40% { transform: translateY(0) rotate(180deg); opacity: 1; }
+    60% { transform: translateY(-8px) rotate(200deg); }
+    80% { transform: translateY(0) rotate(300deg); }
+    100% { transform: translateY(-30px) rotate(360deg); opacity: 1; }
+  }
+
+  /* hero floating balls */
+  .hero .bb-float {
+    position: absolute;
+    width: 72px; height: 72px;
+    background-image: var(--bb-svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    animation: bb-spin-bounce 3s ease-in-out infinite;
+    opacity: 0.85;
+    z-index: 0;
+  }
+  .hero .bb-float.left { left: 8%; top: 30%; animation-delay: .2s; }
+  .hero .bb-float.right { right: 8%; top: 26%; animation-delay: 1.4s; width: 56px; height: 56px; }
+  .hero .bb-float.big { left: 50%; bottom: 10%; width: 110px; height: 110px; margin-left: -55px; animation: bb-spin 9s linear infinite; opacity: 0.12; }
+
+  /* court arc in hero */
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -70px;
+    transform: translateX(-50%);
+    width: 1200px; height: 260px;
+    border: 3px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* small basketball before section number */
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .num::before {
+    content: "";
+    width: 26px; height: 26px;
+    background-image: var(--bb-svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    animation: bb-bounce 1.6s ease-in-out infinite;
+  }
+
+  /* team card hover ball */
+  .team-card::after {
+    content: "";
+    position: absolute;
+    top: 6px; right: 10px;
+    width: 26px; height: 26px;
+    background-image: var(--bb-svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity .2s;
+    pointer-events: none;
+  }
+  .team-card:hover::after {
+    opacity: 1;
+    animation: bb-drop 1.4s ease-in-out infinite;
+  }
+
+  /* player row hover ball */
+  .player-row::after {
+    content: "";
+    width: 20px; height: 20px;
+    background-image: var(--bb-svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity .2s, transform .2s;
+    flex-shrink: 0;
+  }
+  .player-row:hover::after { opacity: 1; transform: scale(1); animation: bb-bounce 0.9s ease-in-out infinite; }
+
+  /* about card hover: slight wobble */
+  .about-card:hover .ac-icon { animation: bb-bounce 0.8s ease-in-out 1; display: inline-block; }
+
   @media (max-width: 640px) {
     .hero { padding: 78px 16px 64px; }
     .hero h1 { transform: none; }
@@ -470,6 +575,8 @@
     .fixture .meta { text-align: left; width: 100%; }
     nav a { padding: 15px 12px; font-size: .78rem; }
     .about, .squad-card { padding: 22px; }
+    .hero .bb-float { width: 44px; height: 44px; }
+    .hero .bb-float.big { width: 70px; height: 70px; margin-left: -35px; }
   }
 </style>
 </head>
@@ -477,6 +584,9 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero">
+  <div class="bb-float left" aria-hidden="true"></div>
+  <div class="bb-float right" aria-hidden="true"></div>
+  <div class="bb-float big" aria-hidden="true"></div>
   <div class="badge"><span>🏀 Internal Basketball League</span></div>
   <h1>DREAM TEAM <span class="hl">INTERNAL</span> <span class="hl2">LEAGUE</span></h1>
   <div class="sub">Kompetisi internal antar tim yang penuh semangat dan sportivitas.</div>
