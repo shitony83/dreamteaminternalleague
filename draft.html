@@ -213,7 +213,35 @@
   .roster-team .rt-players { display: flex; flex-direction: column; gap: 4px; }
   .roster-team .rp { font-size: .82rem; color: var(--ink); display: flex; justify-content: space-between; gap: 8px; }
   .roster-team .rp .cost { color: var(--yellow); font-weight: 700; }
+  .roster-team .rp .p-idx { color: var(--muted); font-weight: 700; }
+  .rt-count { font-size: .7rem; color: var(--muted); margin-left: 6px; font-weight: 400; }
   .empty-note { color: var(--muted); font-size: .88rem; text-align: center; padding: 16px; border: 1px dashed var(--border); border-radius: 8px; grid-column: 1 / -1; }
+
+  /* login */
+  .login-note { font-size: .85rem; color: var(--muted); margin-bottom: 16px; }
+  .login-fields { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .login-fields label { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .login-fields input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 13px 14px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    border-radius: 6px;
+  }
+  .login-fields input:focus { outline: 2px solid var(--orange); }
+  .admin-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    font-size: .82rem; color: var(--muted);
+  }
+  .admin-bar b { color: var(--ink); }
 
   footer { text-align: center; padding: 24px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--border); }
   footer strong { color: var(--ink); }
@@ -234,9 +262,26 @@
 
 <div class="wrap">
 
+  <!-- ===== LOGIN ADMIN ===== -->
+  <div class="card" id="login-card">
+    <h2><span class="dot"></span> 🔐 Login Admin</h2>
+    <p class="login-note">Menu draft/bidding hanya bisa dikelola oleh admin website.</p>
+    <div class="login-fields">
+      <label>ID</label>
+      <input type="text" id="login-id" placeholder="ID admin" autocomplete="username">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="doLogin()"><span>Masuk</span></button>
+    </div>
+    <div class="bid-msg" id="login-msg"></div>
+  </div>
+
   <!-- ===== STEP 1: INPUT NAMES ===== -->
-  <div class="card" id="input-card">
+  <div class="card" id="input-card" style="display:none;">
     <h2><span class="dot"></span> 1. Masukkan Nama Pemain</h2>
+    <div class="admin-bar">Admin: <b>shitony83</b> <button class="btn btn-ghost" style="padding:4px 12px; font-size:.7rem;" onclick="doLogout()"><span>Keluar</span></button></div>
     <textarea id="names-input" placeholder="Tulis satu nama per baris...&#10;&#10;Contoh:&#10;BUDI&#10;ANDI&#10;RUDI"></textarea>
     <div class="hint">Satu nama per baris. Nama kosong akan diabaikan.</div>
     <div class="btn-row">
@@ -313,6 +358,9 @@
 
 <script>
   var STORE_KEY = 'dtl_draft_v2';
+  var AUTH_KEY = 'dtl_draft_auth';
+  var ADMIN_ID = 'shitony83';
+  var ADMIN_PASS = 'tanyatonydulu';
   var TEAMS = {
     blue:   { name: 'BLUE DRAGON',   points: 1000, players: [] },
     red:    { name: 'RED PHOENIX',   points: 1000, players: [] },
@@ -320,6 +368,38 @@
     golden: { name: 'GOLDEN KIRIN',  points: 1000, players: [] }
   };
   var state = load();
+
+  // ---- auth ----
+  function isLoggedIn() {
+    try { return localStorage.getItem(AUTH_KEY) === '1'; } catch (e) { return false; }
+  }
+  function doLogin() {
+    var id = document.getElementById('login-id').value.trim();
+    var pass = document.getElementById('login-pass').value;
+    var msg = document.getElementById('login-msg');
+    if (id === ADMIN_ID && pass === ADMIN_PASS) {
+      try { localStorage.setItem(AUTH_KEY, '1'); } catch (e) {}
+      msg.textContent = '';
+      msg.className = 'bid-msg';
+      showApp();
+    } else {
+      msg.textContent = '❌ ID atau password salah.';
+      msg.className = 'bid-msg err';
+    }
+  }
+  function doLogout() {
+    try { localStorage.removeItem(AUTH_KEY); } catch (e) {}
+    document.getElementById('login-pass').value = '';
+    location.reload();
+  }
+  function showApp() {
+    document.getElementById('login-card').style.display = 'none';
+    document.getElementById('input-card').style.display = 'block';
+    // kalau draft sudah dimulai, langsung tampilkan draw stage
+    if (state.started || state.pool.length > 0 || state.current || state.waiting.length > 0) {
+      showDraw();
+    }
+  }
 
   function defaultState() {
     var teams = {};
@@ -516,13 +596,13 @@
     Object.keys(state.teams).forEach(function (k) {
       var tm = state.teams[k];
       html += '<div class="roster-team">';
-      html += '<div class="rt-head"><span class="rt-name">' + tm.name + '</span><span class="rt-pts">Sisa <b>' + tm.points + '</b></span></div>';
+      html += '<div class="rt-head"><span class="rt-name">' + tm.name + '<span class="rt-count">(' + tm.players.length + ' pemain)</span></span><span class="rt-pts">Sisa <b>' + tm.points + '</b></span></div>';
       html += '<div class="rt-players">';
       if (tm.players.length === 0) {
         html += '<div class="rp" style="color:var(--muted);">Belum ada player</div>';
       } else {
-        tm.players.forEach(function (p) {
-          html += '<div class="rp"><span>' + escapeHtml(p.name) + '</span><span class="cost">' + p.bid + ' pts</span></div>';
+        tm.players.forEach(function (p, idx) {
+          html += '<div class="rp"><span><span class="p-idx">' + (idx + 1) + '.</span> ' + escapeHtml(p.name) + '</span><span class="cost">' + p.bid + ' pts</span></div>';
         });
       }
       html += '</div></div>';
@@ -562,9 +642,10 @@
   }
 
   // init
-  if (state.started || state.pool.length > 0 || state.current) {
-    showDraw();
+  if (isLoggedIn()) {
+    showApp();
   }
+  // else: login-card tetap tampil (default), app terkunci
 </script>
 
 </body>
