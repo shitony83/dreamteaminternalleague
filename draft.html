@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Bidding — DREAM TEAM INTERNAL LEAGUE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface-2: #1a2234;
+    --ink: #ffffff;
+    --muted: #94a3b8;
+    --orange: #ff6a00;
+    --yellow: #ffb800;
+    --blue: #2f7bff;
+    --red: #ff3b3b;
+    --gold: #f5c542;
+    --white-t: #e8e8e8;
+    --green: #22c55e;
+    --border: rgba(255,255,255,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.hero {
+    text-align: center;
+    padding: 44px 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #0a0e1a 0%, #141c33 60%, #1b1a2e 100%);
+  }
+  .hero .badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Anton', sans-serif;
+    font-size: .76rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 7px 22px;
+    transform: skewX(-8deg);
+    margin-bottom: 16px;
+  }
+  .hero .badge span { display: inline-block; transform: skewX(8deg); }
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.8rem, 5.5vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    transform: skewX(-3deg);
+  }
+  .hero h1 .hl { color: var(--orange); }
+  .hero p { color: var(--muted); margin-top: 8px; font-size: .9rem; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 5px solid var(--orange);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h2 .dot { width: 10px; height: 10px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 10px var(--orange); }
+  textarea {
+    width: 100%;
+    min-height: 160px;
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: .95rem;
+    resize: vertical;
+  }
+  textarea:focus { outline: 2px solid var(--orange); }
+  .hint { font-size: .8rem; color: var(--muted); margin-top: 8px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    padding: 15px 32px;
+    transform: skewX(-6deg);
+    transition: transform .15s, filter .15s;
+  }
+  .btn span { display: inline-block; transform: skewX(6deg); }
+  .btn-primary { background: var(--orange); color: #fff; }
+  .btn-primary:hover:not(:disabled) { filter: brightness(1.12); transform: skewX(-6deg) scale(1.03); }
+  .btn-primary:disabled { background: #3a2a1a; color: #7a6a55; cursor: not-allowed; }
+  .btn-ghost {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); font-size: .85rem;
+  }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--muted); }
+  .btn-yellow { background: var(--yellow); color: var(--bg); }
+  .btn-yellow:hover { filter: brightness(1.08); transform: skewX(-6deg) scale(1.03); }
+  .btn-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+
+  /* draw stage */
+  .draw-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 5px solid var(--yellow);
+    padding: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .counter { display: inline-flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+  .counter .c { background: var(--surface-2); border: 1px solid var(--border); padding: 8px 18px; text-align: center; }
+  .counter .c .n { font-family: 'Anton', sans-serif; font-size: 1.3rem; color: var(--yellow); }
+  .counter .c .l { font-size: .66rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+
+  .reveal-box {
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    border: 2px dashed var(--border);
+    margin-bottom: 20px;
+    padding: 22px;
+    border-radius: 8px;
+  }
+  .reveal-box .placeholder { color: var(--muted); font-size: .95rem; }
+  .reveal-box .name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.5rem, 6.5vw, 2.6rem);
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    word-break: break-word;
+    animation: pop .45s cubic-bezier(.2,1.4,.4,1);
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(.6) rotate(-3deg); }
+    60% { transform: scale(1.06) rotate(1deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  .step-label { font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+
+  /* team bid panel */
+  .bid-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 18px 0; }
+  .bid-team {
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    padding: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    position: relative;
+  }
+  .bid-team:hover { border-color: var(--muted); }
+  .bid-team.selected { border-color: var(--orange); background: #1e2a40; }
+  .bid-team .t-name { font-family: 'Anton', sans-serif; font-size: .95rem; letter-spacing: .02em; }
+  .bid-team .t-pts { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+  .bid-team .t-pts b { color: var(--yellow); }
+  .bid-team .badge-pts { position: absolute; top: 8px; right: 10px; font-size: .7rem; }
+
+  .bid-input-row { display: flex; gap: 10px; margin-top: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .bid-input-row input {
+    width: 130px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .bid-input-row input:focus { outline: 2px solid var(--orange); }
+  .bid-msg { font-size: .82rem; color: var(--muted); margin-top: 10px; min-height: 20px; }
+  .bid-msg.err { color: var(--red); }
+  .bid-msg.ok { color: var(--green); }
+
+  /* assigned list grouped by team */
+  .roster-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .roster-head h3 { font-family: 'Anton', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: .03em; }
+  .roster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .roster-team { background: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--orange); padding: 12px 14px; }
+  .roster-team .rt-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .roster-team .rt-name { font-family: 'Anton', sans-serif; font-size: .9rem; letter-spacing: .02em; }
+  .roster-team .rt-pts { font-size: .75rem; color: var(--muted); }
+  .roster-team .rt-pts b { color: var(--yellow); }
+  .roster-team .rt-players { display: flex; flex-direction: column; gap: 4px; }
+  .roster-team .rp { font-size: .82rem; color: var(--ink); display: flex; justify-content: space-between; gap: 8px; }
+  .roster-team .rp .cost { color: var(--yellow); font-weight: 700; }
+  .empty-note { color: var(--muted); font-size: .88rem; text-align: center; padding: 16px; border: 1px dashed var(--border); border-radius: 8px; grid-column: 1 / -1; }
+
+  footer { text-align: center; padding: 24px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--border); }
+  footer strong { color: var(--ink); }
+
+  @media (max-width: 520px) {
+    .bid-panel, .roster-grid { grid-template-columns: 1fr; }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="badge"><span>🏀 Draft Bidding</span></div>
+  <h1>DREAM TEAM <span class="hl">INTERNAL LEAGUE</span></h1>
+  <p>Undian pemain + sistem bidding — setiap tim punya 1000 poin.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== STEP 1: INPUT NAMES ===== -->
+  <div class="card" id="input-card">
+    <h2><span class="dot"></span> 1. Masukkan Nama Pemain</h2>
+    <textarea id="names-input" placeholder="Tulis satu nama per baris...&#10;&#10;Contoh:&#10;BUDI&#10;ANDI&#10;RUDI"></textarea>
+    <div class="hint">Satu nama per baris. Nama kosong akan diabaikan.</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="saveNames()"><span>Simpan &amp; Mulai Draft</span></button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 2: DRAW + BID ===== -->
+  <div class="draw-card" id="draw-card" style="display:none;">
+    <div class="counter">
+      <div class="c"><div class="n" id="c-total">0</div><div class="l">Total</div></div>
+      <div class="c"><div class="n" id="c-remaining">0</div><div class="l">Sisa</div></div>
+      <div class="c"><div class="n" id="c-waiting">0</div><div class="l">Menunggu</div></div>
+      <div class="c"><div class="n" id="c-done">0</div><div class="l">Terpilih</div></div>
+    </div>
+
+    <div class="step-label" id="step-label">Tekan START untuk undian pertama</div>
+    <div class="reveal-box">
+      <div class="placeholder" id="reveal-placeholder">Nama akan muncul di sini 🏀</div>
+      <div class="name" id="reveal-name" style="display:none;"></div>
+    </div>
+
+    <!-- bid panel -->
+    <div id="bid-panel" style="display:none;">
+      <div class="bid-panel">
+        <div class="bid-team" data-team="blue" onclick="selectTeam('blue')">
+          <div class="badge-pts"></div>
+          <div class="t-name">🐉 BLUE DRAGON</div>
+          <div class="t-pts">Sisa: <b class="pts-val" id="pts-blue">1000</b> poin</div>
+        </div>
+        <div class="bid-team" data-team="red" onclick="selectTeam('red')">
+          <div class="t-name">🔥 RED PHOENIX</div>
+          <div class="t-pts">Sisa: <b class="pts-val" id="pts-red">1000</b> poin</div>
+        </div>
+        <div class="bid-team" data-team="white" onclick="selectTeam('white')">
+          <div class="t-name">🐅 WHITE TIGER</div>
+          <div class="t-pts">Sisa: <b class="pts-val" id="pts-white">1000</b> poin</div>
+        </div>
+        <div class="bid-team" data-team="golden" onclick="selectTeam('golden')">
+          <div class="t-name">🦄 GOLDEN KIRIN</div>
+          <div class="t-pts">Sisa: <b class="pts-val" id="pts-golden">1000</b> poin</div>
+        </div>
+      </div>
+      <div class="bid-input-row">
+        <input type="number" id="bid-points" min="10" step="10" placeholder="Kelipatan 10" value="">
+        <button class="btn btn-yellow" id="btn-confirm" onclick="confirmBid()"><span>Konfirmasi Bid</span></button>
+      </div>
+      <div class="bid-input-row">
+        <button class="btn btn-ghost" onclick="passBid()"><span>⏭ Tidak Ada yang Bid</span></button>
+      </div>
+      <div class="bid-msg" id="bid-msg"></div>
+    </div>
+
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-primary" id="btn-start" onclick="drawNext()"><span>▶ START / NEXT</span></button>
+      <button class="btn btn-ghost" onclick="resetAll()"><span>Reset</span></button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 3: ROSTER ===== -->
+  <div class="card" id="roster-card" style="display:none;">
+    <div class="roster-head">
+      <h3>Hasil Draft per Tim</h3>
+      <button class="btn btn-ghost" style="padding:8px 14px; font-size:.75rem;" onclick="copyRoster()"><span>Salin</span></button>
+    </div>
+    <div class="roster-grid" id="roster-grid"></div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>DREAM TEAM INTERNAL LEAGUE</strong> — Sistem Draft Bidding • Progres tersimpan otomatis di browser ini
+</footer>
+
+<script>
+  var STORE_KEY = 'dtl_draft_v2';
+  var TEAMS = {
+    blue:   { name: 'BLUE DRAGON',   points: 1000, players: [] },
+    red:    { name: 'RED PHOENIX',   points: 1000, players: [] },
+    white:  { name: 'WHITE TIGER',   points: 1000, players: [] },
+    golden: { name: 'GOLDEN KIRIN',  points: 1000, players: [] }
+  };
+  var state = load();
+
+  function defaultState() {
+    var teams = {};
+    Object.keys(TEAMS).forEach(function (k) {
+      teams[k] = { name: TEAMS[k].name, points: 1000, players: [] };
+    });
+    return { pool: [], waiting: [], current: null, teams: teams, started: false };
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && Array.isArray(s.pool) && s.teams) {
+          // backward-compat: pastikan field waiting selalu ada
+          if (!Array.isArray(s.waiting)) s.waiting = [];
+          return s;
+        }
+      }
+    } catch (e) {}
+    return defaultState();
+  }
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+  var selectedTeam = null;
+
+  function parseNames(text) {
+    return text.split('\n').map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function saveNames() {
+    var names = parseNames(document.getElementById('names-input').value);
+    if (names.length === 0) { alert('Masukkan minimal satu nama.'); return; }
+    state = defaultState();
+    state.pool = shuffle(names);
+    save();
+    showDraw();
+  }
+
+  function showDraw() {
+    document.getElementById('input-card').style.display = 'none';
+    document.getElementById('draw-card').style.display = 'block';
+    document.getElementById('roster-card').style.display = 'block';
+    render();
+  }
+
+  function drawNext() {
+    // Jika pool habis tapi masih ada pemain yang belum terbid, tampilkan lagi
+    if (state.pool.length === 0 && state.waiting.length > 0) {
+      state.pool = shuffle(state.waiting);
+      state.waiting = [];
+    }
+    if (state.pool.length === 0) {
+      alert('Semua nama sudah keluar! Lihat hasil di daftar tim.');
+      return;
+    }
+    if (state.current) {
+      alert('Player "' + state.current + '" belum di-assign. Pilih tim & poin dulu, atau klik Tidak Ada yang Bid.');
+      return;
+    }
+    state.current = state.pool.shift();
+    state.started = true;
+    selectedTeam = null;
+    save();
+    render();
+  }
+
+  function passBid() {
+    if (!state.current) return;
+    // pindahkan ke daftar tunggu -> akan dimunculkan lagi setelah semua pemain selesai
+    state.waiting.push(state.current);
+    state.current = null;
+    selectedTeam = null;
+    document.getElementById('bid-points').value = '';
+    document.getElementById('bid-msg').textContent = '';
+    document.getElementById('bid-msg').className = 'bid-msg';
+    save();
+    render();
+  }
+
+  function selectTeam(k) {
+    if (!state.current) { alert('Tarik nama dulu (START/NEXT).'); return; }
+    selectedTeam = k;
+    document.querySelectorAll('.bid-team').forEach(function (el) {
+      el.classList.toggle('selected', el.getAttribute('data-team') === k);
+    });
+    document.getElementById('bid-msg').textContent = '';
+    document.getElementById('bid-msg').className = 'bid-msg';
+  }
+
+  function confirmBid() {
+    if (!state.current) return;
+    if (!selectedTeam) { setMsg('Pilih tim dulu!', 'err'); return; }
+    var ptsInput = document.getElementById('bid-points');
+    var bid = parseInt(ptsInput.value, 10);
+    if (isNaN(bid) || bid <= 0) { setMsg('Masukkan jumlah poin yang valid.', 'err'); return; }
+    // Aturan: kenaikan bid per 10 poin -> bid harus kelipatan 10
+    if (bid % 10 !== 0) {
+      setMsg('Bid harus kelipatan 10 poin (misal 10, 20, 30...).', 'err');
+      return;
+    }
+    var team = state.teams[selectedTeam];
+    if (bid > team.points) {
+      setMsg('Poin tidak cukup! ' + team.name + ' hanya punya ' + team.points + ' poin.', 'err');
+      return;
+    }
+    // deduct & assign
+    team.points -= bid;
+    team.players.push({ name: state.current, bid: bid });
+    state.current = null;
+    selectedTeam = null;
+    document.getElementById('bid-points').value = '';
+    setMsg('✅ ' + team.name + ' mendapatkan player dengan bid ' + bid + ' poin.', 'ok');
+    save();
+    render();
+  }
+
+  function setMsg(txt, cls) {
+    var el = document.getElementById('bid-msg');
+    el.textContent = txt;
+    el.className = 'bid-msg' + (cls ? ' ' + cls : '');
+  }
+
+  function render() {
+    // counters
+    var assignedCount = Object.keys(state.teams).reduce(function (acc, k) {
+      return acc + state.teams[k].players.length;
+    }, 0);
+    document.getElementById('c-total').textContent = state.pool.length + assignedCount + state.waiting.length + (state.current ? 1 : 0);
+    document.getElementById('c-remaining').textContent = state.pool.length;
+    document.getElementById('c-waiting').textContent = state.waiting.length;
+    document.getElementById('c-done').textContent = assignedCount;
+
+    // points display
+    Object.keys(state.teams).forEach(function (k) {
+      var el = document.getElementById('pts-' + k);
+      if (el) el.textContent = state.teams[k].points;
+    });
+
+    // reveal
+    var placeholder = document.getElementById('reveal-placeholder');
+    var nameEl = document.getElementById('reveal-name');
+    var bidPanel = document.getElementById('bid-panel');
+    var btn = document.getElementById('btn-start');
+    var stepLabel = document.getElementById('step-label');
+
+    if (state.current) {
+      placeholder.style.display = 'none';
+      nameEl.style.display = 'block';
+      nameEl.textContent = state.current;
+      bidPanel.style.display = 'block';
+      btn.innerHTML = '<span>▶ NEXT</span>';
+      btn.disabled = false;
+      stepLabel.textContent = 'Player untuk dibid:';
+      // reset selected highlight
+      document.querySelectorAll('.bid-team').forEach(function (el) { el.classList.remove('selected'); });
+    } else if (state.pool.length > 0) {
+      placeholder.style.display = 'block';
+      placeholder.textContent = 'Player selesai di-assign. Tekan NEXT untuk pemain berikutnya.';
+      nameEl.style.display = 'none';
+      bidPanel.style.display = 'none';
+      btn.innerHTML = '<span>▶ NEXT</span>';
+      btn.disabled = false;
+      stepLabel.textContent = 'Tekan NEXT untuk pemain berikutnya';
+    } else if (state.waiting.length > 0) {
+      placeholder.style.display = 'block';
+      placeholder.textContent = '⏳ ' + state.waiting.length + ' pemain belum terbid. Tekan NEXT untuk memunculkannya lagi.';
+      nameEl.style.display = 'none';
+      bidPanel.style.display = 'none';
+      btn.innerHTML = '<span>▶ Tampilkan Lagi</span>';
+      btn.disabled = false;
+      stepLabel.textContent = 'Pemain yang belum terbid akan dimunculkan kembali';
+    } else {
+      placeholder.style.display = 'block';
+      placeholder.textContent = '🎉 Semua nama telah keluar!';
+      nameEl.style.display = 'none';
+      bidPanel.style.display = 'none';
+      btn.innerHTML = '<span>▶ Selesai</span>';
+      btn.disabled = true;
+      stepLabel.textContent = 'Draft selesai';
+    }
+
+    // roster
+    var grid = document.getElementById('roster-grid');
+    var html = '';
+    Object.keys(state.teams).forEach(function (k) {
+      var tm = state.teams[k];
+      html += '<div class="roster-team">';
+      html += '<div class="rt-head"><span class="rt-name">' + tm.name + '</span><span class="rt-pts">Sisa <b>' + tm.points + '</b></span></div>';
+      html += '<div class="rt-players">';
+      if (tm.players.length === 0) {
+        html += '<div class="rp" style="color:var(--muted);">Belum ada player</div>';
+      } else {
+        tm.players.forEach(function (p) {
+          html += '<div class="rp"><span>' + escapeHtml(p.name) + '</span><span class="cost">' + p.bid + ' pts</span></div>';
+        });
+      }
+      html += '</div></div>';
+    });
+    grid.innerHTML = html;
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function resetAll() {
+    if (!confirm('Reset semua nama dan mulai draft baru?')) return;
+    state = defaultState();
+    localStorage.removeItem(STORE_KEY);
+    selectedTeam = null;
+    document.getElementById('input-card').style.display = 'block';
+    document.getElementById('draw-card').style.display = 'none';
+    document.getElementById('roster-card').style.display = 'none';
+    document.getElementById('names-input').value = '';
+  }
+
+  function copyRoster() {
+    var lines = [];
+    Object.keys(state.teams).forEach(function (k) {
+      var tm = state.teams[k];
+      lines.push('=== ' + tm.name + ' (sisa ' + tm.points + ' pts) ===');
+      tm.players.forEach(function (p) { lines.push('  ' + p.name + ' — ' + p.bid + ' pts'); });
+    });
+    var txt = lines.join('\n');
+    if (!txt) { alert('Belum ada hasil draft.'); return; }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function () { alert('Hasil draft disalin!'); });
+    } else {
+      prompt('Salin hasil berikut:', txt);
+    }
+  }
+
+  // init
+  if (state.started || state.pool.length > 0 || state.current) {
+    showDraw();
+  }
+</script>
+
+</body>
+</html>
